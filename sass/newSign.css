@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+#newSign {
+  background: url(../images/home/home-bg.png) no-repeat center center;
+  height: 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%; }
+  #newSign #header {
+    height: 0.65rem; }
+    #newSign #header .infoSelect {
+      width: 100%;
+      justify-content: space-between;
+      opacity: 1; }
+      #newSign #header .infoSelect p {
+        position: relative;
+        width: 3.75rem;
+        height: 0.65rem;
+        margin: 0;
+        text-align: center;
+        line-height: 0.65rem; }
+        #newSign #header .infoSelect p:nth-last-child(1) {
+          border: 0; }
+        #newSign #header .infoSelect p select {
+          position: absolute;
+          text-align: left;
+          width: 1.5rem;
+          font-size: 0.28rem;
+          color: #64D0FE;
+          background-color: transparent;
+          padding: 0;
+          left: 1.1rem;
+          z-index: 1; }
+        #newSign #header .infoSelect p span {
+          position: absolute;
+          left: 2.2rem;
+          font-size: 0.13rem;
+          color: #64D0FE; }
+    #newSign #header #showUl {
+      width: 100%;
+      position: fixed;
+      z-index: 100;
+      background-color: #eee;
+      padding: 0; }
+      #newSign #header #showUl li {
+        padding-left: 1rem;
+        list-style: none;
+        width: 100%;
+        font-size: 0.15rem;
+        line-height: 0.6rem;
+        border-bottom: 1px solid #ddd; }
+  #newSign .calendar {
+    padding: 0 0.28rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 0.88rem; }
+    #newSign .calendar p:nth-child(1) {
+      color: #4087a6;
+      font-size: 0.26rem; }
+    #newSign .calendar p:nth-child(2) {
+      width: 4rem;
+      border: 1px solid;
+      color: #53aed5;
+      font-size: 0.28rem;
+      border-radius: 0.28rem;
+      height: 0.47rem;
+      line-height: 0.47rem;
+      text-align: center; }
+      #newSign .calendar p:nth-child(2) span:nth-last-child(1) {
+        font-size: 0.2rem;
+        line-height: 0.47rem; }
+  #newSign table,
+  #newSign tr,
+  #newSign td,
+  #newSign th {
+    font-size: 0.24rem;
+    color: #00b1fa;
+    text-align: center;
+    border: 0;
+    white-space: nowrap; }
+  #newSign tr {
+    display: flex; }
+  #newSign .dept th,
+  #newSign .dept td {
+    width: 1.5rem;
+    text-align: center; }
+  #newSign .dept td {
+    line-height: 35px; }
+  #newSign .group td,
+  #newSign .group th {
+    width: 1.1rem;
+    text-align: center; }
+    #newSign .group td:nth-child(2),
+    #newSign .group th:nth-child(2) {
+      width: 1.55rem; }
+    #newSign .group td:nth-child(3),
+    #newSign .group th:nth-child(3) {
+      width: 1.55rem; }
+  #newSign .group td {
+    line-height: 35px; }
+  #newSign tbody tr:nth-child(2n) {
+    background-color: #141b31; }
+
+/*# sourceMappingURL=newSign.css.map */

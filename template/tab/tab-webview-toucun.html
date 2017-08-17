@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>头寸页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../sass/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../sass/toucun.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<script src="../../js/iconfont.js" type="text/javascript"></script>
+		<style>
+			.mui-content {
+				background-color: transparent;
+			}
+			
+			#scroll1 {
+				/*overflow: scroll;*/
+			}
+			
+			.mui-control-content {
+				height: 100%;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+			
+			.mui-toast-container {
+				position: relative;
+				top: 300px;
+				color: #00b1fa;
+				background-color: #black;
+			}
+			
+			.mui-toast-message {
+				/*color: #00b1fa;*/
+				color: white;
+				font-size: 16px;
+				background-color: deepskyblue;
+				opacity: 0.8;
+			}
+			
+			#his {
+				width: 7.5rem;
+			}
+			
+			#her {
+				width: 13.34rem;
+			}
+			
+			body .data-table .t_r table {
+				width: 1120px;
+			}
+			
+			body .data-table .t_l {
+				width: 70px;
+			}
+			
+			#overAll table tr:nth-child(2n) {
+				background-color: #141b31;
+			}
+			
+			@media screen and (orientation: portrait) {
+				#his {
+					display: block;
+				}
+				#her {
+					display: none;
+				}
+				#overAll #item1 .his .title-type {
+					width: 2.29rem;
+				}
+				#overAll #item1 .title-chicang {
+					width: 2.29rem;
+				}
+				#overAll #item1 .sel .amountSelect,
+				#overAll #item1 .sel .typeSelect {
+					font-size: 0.24rem;
+					padding: 0.07rem 0.3rem;
+				}
+				#overAll #item1 .sel {
+					left: 4rem;
+				}
+				#overAll #item1 .title-cangwei {
+					width: 2.29rem;
+				}
+				#overAll .table tr>th {
+					font-size: 0.22rem;
+				}
+				#overAll .table tr>td {
+					font-size: 0.24rem;
+				}
+				#overAll #item1 .table .close p {
+					font-size: 0.24rem;
+				}
+				#overAll #item2 th,
+				#overAll #item2 td {
+					font-size: 0.24rem;
+					/*padding: 0.2rem 0.25rem;*/
+					padding: 0.2rem 0.1rem;
+				}
+				#overAll #item3 th,
+				#overAll #item3 td {
+					font-size: 0.24rem;
+					padding: 0.2rem 0.25rem;
+				}
+				#overAll .lbdc-filter {
+					font-size: 0.28rem;
+				}
+				body .data-table .t_r table {
+					/*width: 1300px;*/
+					width: 20rem;
+				}
+				/*#overAll table th,#overAll table td{
+					text-align: right;
+				}*/
+			}
+			
+			@media screen and (orientation: landscape) {
+				#his {
+					display: none;
+				}
+				#her {
+					display: block;
+				}
+				#overAll #item1 .his .title-type {
+					width: 1.29rem;
+				}
+				#overAll #item1 .title-chicang {
+					width: 1.29rem;
+				}
+				#overAll #item1 .sel .amountSelect,
+				#overAll #item1 .sel .typeSelect {
+					font-size: 0.16rem;
+					padding: 0.04rem 0.15rem;
+				}
+				#overAll #item1 .sel {
+					left: 5.4rem;
+				}
+				#overAll #item1 .title-cangwei {
+					width: 1.29rem;
+				}
+				#overAll .table tr>th {
+					font-size: 0.12rem;
+				}
+				#overAll .table tr>td {
+					font-size: 0.14rem;
+				}
+				#overAll #item1 .table .close p {
+					font-size: 0.14rem;
+				}
+				#overAll #item2 th,
+				#overAll #item2 td {
+					font-size: 0.14rem;
+					/*padding: 0;*/
+					padding: 0.05rem 0.05rem;
+				}
+				#overAll #item3 th,
+				#overAll #item3 td {
+					font-size: 0.14rem;
+					padding: 0.04rem 0.12rem;
+				}
+				#overAll .lbdc-filter {
+					font-size: 0.14rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="overAll">
+
+			<div id="slider" class="mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1">
+							总体
+						</a>
+						<span id="refspage"><a class="mui-control-item" href="#item2">
+							高客
+						</a></span>
+
+						<span id="zhibopage"><a class="mui-control-item" href="#item3">
+							直播
+						</a></span>
+					</div>
+				</div>
+
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div style="position: absolute;top: 40px;bottom: 0;width: 100%;">
+					<div id="item1" class="mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--柱状图-->
+								<div class="his">
+									<div id="his"></div>
+									<div id="her"></div>
+									<div class="title-type" id="titleType" onclick="imgInfo('PT')">
+										<img src="../../images/toucun/toucun/title-type.png" />
+									</div>
+								</div>
+								<div class="more" id="more">
+									<img src="../../images/toucun/toucun/more.png" alt="" />
+								</div>
+								<div class="table" id="table">
+									<div class="row divTab">
+										<div class="divFix">
+											<table border="" cellspacing="" cellpadding="">
+												<thead>
+													<tr>
+														<th>品种</br>&nbsp;</th>
+													</tr>
+												</thead>
+												<tbody id="tbFixOverall">
+
+												</tbody>
+											</table>
+										</div>
+
+										<div class="divScr" id="leftNum11">
+											<table border="" cellspacing="" cellpadding="">
+												<thead>
+													<tr>
+														<th>头寸</br>(亿元)</th>
+														<th>多头金额</br>(亿元)</th>
+														<th>空头金额</br>(亿元)</th>
+														<th>多单占比</br>&nbsp;</th>
+														<th>持仓总人数</br>&nbsp;</th>
+														<th>多头人数</br>&nbsp;</th>
+														<th>空头人数</br>&nbsp;</th>
+														<th>多头盈亏</br>(万元)</th>
+														<th>空头盈亏</br>(万元)</th>
+														<th>浮动盈亏</br>(万元)</th>
+														<!--<th>平仓盈亏</br>(万元)</th>-->
+														<th>成交人数</br>&nbsp;</th>
+														<th>成交金额</br>(亿元)</th>
+														<th>公司手续费</br>(万元)</th>
+													</tr>
+												</thead>
+												<tbody id="tbScrOverall">
+
+												</tbody>
+
+											</table>
+										</div>
+									</div>
+
+									<div class="close" id="close">
+										<p><span>收起</span><span class="iconfont icon-close-shang"></span></p>
+									</div>
+								</div>
+								<div class="title-chicang" onclick="imgInfo('PA')"><img src="../../images/toucun/toucun/title-chicang.png" alt="" /></div>
+								<div class="sel">
+									<span class="amountSelect"><select onchange="btnSel1()" name="sel1">
+										<option value="JE">金额</option>
+										<option value="RS">人数</option>
+										<option value="YK">盈亏</option>
+									</select></span>
+									<span class="typeSelect"><select onchange="btnSel2()" name="sel2">
+										<option value="ALL">全部</option>
+										<option value="RB">螺纹钢</option>
+										<option value="CU">铜</option>
+										<option value="RU">橡胶</option>
+										<option value="AU">黄金</option>
+										<option value="NI">镍</option>
+										<option value="AG">白银</option>
+										<option value="BU">沥青</option>
+										<option value="I">铁矿石</option>
+										<option value="M">豆粕</option>
+										<option value="P">棕榈油</option>
+										<option value="Y">豆油</option>
+										<option value="J">焦炭</option>
+										<option value="JM">焦煤</option>
+									</select></span>
+								</div>
+								<div class="toucun-chicang toucun-padding">
+									<div id="chicang-chart" class="chicang-chart"></div>
+								</div>
+								<div onclick="imgInfo('PP')" class="title-cangwei">
+									<img src="../../images/toucun/toucun/title-cangwei.png" />
+								</div>
+								<div class="toucun-chicang toucun-padding">
+									<div id="chicang-cangwei" class="chicang-chart"></div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div id="item2" class="mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="lbdc-filter row toucun-padding">
+									<div>品种</div>
+									<div class="row filter-sel" style="color: #58b7df;">
+
+										<span>
+											<select id="typeGaoke" onchange="gaokeFull()" name="typeGaokee">
+											<option value="ALL">全部</option>
+										<option value="RB">螺纹钢</option>
+										<option value="CU">铜</option>
+										<option value="RU">橡胶</option>
+										<option value="AU">黄金</option>
+										<option value="NI">镍</option>
+										<option value="AG">白银</option>
+										<option value="BU">沥青</option>
+										<option value="I">铁矿石</option>
+										<option value="M">豆粕</option>
+										<option value="P">棕榈油</option>
+										<option value="Y">豆油</option>
+										<option value="J">焦炭</option>
+										<option value="JM">焦煤</option>
+										</select></span>
+
+										<span class="iconfont icon-arrowRight-copy"></span>
+
+									</div>
+								</div>
+
+								<!--<div class="crossScreen" id="crossScreenite2">
+									<img src="../../images/toucun/toucun/crossScreen.png" />
+								</div>-->
+								<div class="data-table">
+									<div class="t_l">
+										<table>
+											<tbody>
+												<tr>
+													<th>高客小组</br>&nbsp;</th>
+												</tr>
+											</tbody>
+										</table>
+										<div class="t_l_freeze">
+											<table id="tbFixGaoke">
+
+											</table>
+										</div>
+									</div>
+									<div class="t_r">
+										<div class="t_r_t">
+											<table>
+												<tbody>
+													<tr>
+														<th>头寸</br>(亿元)</th>
+														<th>多头金额</br>(亿元)</th>
+														<th>空头金额</br>(亿元)</th>
+														<th>多单占比</br>&nbsp;</th>
+														<th>持仓总人数</br>&nbsp;</th>
+														<th>多头人数</br>&nbsp;</th>
+														<th>空头人数</br>&nbsp;</th>
+														<th>多头盈亏</br>(万元)</th>
+														<th>空头盈亏</br>(万元)</th>
+														<th>浮动盈亏</br>(万元)</th>
+														<!--<th>平仓盈亏</br>(万元)</th>-->
+														<th>成交人数</br>&nbsp;</th>
+														<th>成交金额</br>(亿元)</th>
+														<th>公司手续费</br>(万元)</th>
+														<th>仓位</br>&nbsp;</th>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="t_r_content">
+											<table>
+												<tbody id="tbScrGaoke">
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item3" class="mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--liveBroadcast  =>   lbdc   直播-->
+								<div class="lbdc-filter row toucun-padding">
+									<div>品种</div>
+									<div class="row filter-sel" style="color: #58b7df;">
+										<span><select id="typeZhibo" onchange="zhiboFull()" name="typeZhibo">
+											<option value="ALL">全部</option>
+										<option value="RB">螺纹钢</option>
+										<option value="CU">铜</option>
+										<option value="RU">橡胶</option>
+										<option value="AU">黄金</option>
+										<option value="NI">镍</option>
+										<option value="AG">白银</option>
+										<option value="BU">沥青</option>
+										<option value="I">铁矿石</option>
+										<option value="M">豆粕</option>
+										<option value="P">棕榈油</option>
+										<option value="Y">豆油</option>
+										<option value="J">焦炭</option>
+										<option value="JM">焦煤</option>
+										</select></span>
+
+										<span class="iconfont icon-arrowRight-copy"></span>
+
+									</div>
+								</div>
+
+								<div class="table row" id="tableZhibo">
+									<div class="divFix">
+										<table border="" cellspacing="" cellpadding="">
+											<thead>
+												<tr>
+													<th>直播室</br>&nbsp;</th>
+												</tr>
+											</thead>
+											<tbody id="tbFixZhibo">
+
+											</tbody>
+										</table>
+									</div>
+									<div class="divScr" id="leftNum33">
+										<table border="" cellspacing="" cellpadding="">
+											<thead>
+												<tr>
+													<th>头寸</br>(亿元)</th>
+													<th>多头金额</br>(亿元)</th>
+													<th>空头金额</br>(亿元)</th>
+													<th>多单占比</br>&nbsp;</th>
+													<th>持仓总人数</br>&nbsp;</th>
+													<th>多头人数</br>&nbsp;</th>
+													<th>空头人数</br>&nbsp;</th>
+													<th>多头盈亏</br>(万元)</th>
+													<th>空头盈亏</br>(万元)</th>
+													<th>浮动盈亏</br>(万元)</th>
+													<!--<th>平仓盈亏</br>(万元)</th>-->
+													<th>成交人数</br>&nbsp;</th>
+													<th>成交金额</br>(亿元)</th>
+													<th>公司手续费</br>(万元)</th>
+													<th>仓位</br>&nbsp;</th>
+
+												</tr>
+											</thead>
+											<tbody id="tbScrZhibo">
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!--<div class="crossScreen" id="crossScreenite3">
+									<img src="../../images/toucun/toucun/crossScreen.png" />
+								</div>-->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<script src="../../js/mui.min.js"></script>-->
+		<script src="../../js/home/mui.js" type="text/javascript">
+		</script>
+		<script src="../../outerControl/echarts.js"></script>
+		<script src="../../js/mui.pullToRefresh.js"></script>
+		<script src="../../js/publicFunction.js" type="text/javascript"></script>
+		<script src="../../js/mui.pullToRefresh.material.js" type="text/javascript"></script>
+		<script src="../../js/myAjax.js"></script>
+		<script src="../../js/toucun.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.min.js" type="text/javascript"></script>
+		<script src="../../outerControl/iscroll-probe.min.js"></script>
+		<script src="../../js/main.js"></script>
+		<!--<script src="../../js/mui.pullToRefresh.js"></script>-->
+		<script>
+	//选项卡切换 下标显示
+			var buttonTopArr = document.getElementById("sliderSegmentedControl").getElementsByClassName("mui-scroll")[0].getElementsByTagName("a");
+			var btnLen=buttonTopArr.length;
+			if(localStorage.gaokeBol=='false'){
+				document.getElementById('sliderProgressBar').style.width='50%';
+				document.getElementById('refspage').style.display='none';
+				document.querySelector('#sliderSegmentedControl .mui-scroll a').style.width='50%';
+				btnLen=btnLen-1;
+			}
+			if(localStorage.zhiboBol=='false'){
+				document.getElementById('sliderProgressBar').style.width='50%';
+				document.getElementById('zhibopage').style.display='none';
+				document.querySelector('#sliderSegmentedControl .mui-scroll a').style.width='50%';
+				btnLen=btnLen-1;
+			}
+			for(var i = 0; i < buttonTopArr.length; i++) {
+				buttonTopArr[i].index = i;
+				buttonTopArr[i].addEventListener("tap", function() {
+					if(btnLen==2&&this.index==2){
+						this.index=this.index-1;
+					}
+					document.getElementById("sliderProgressBar").style.left = (1 / btnLen) * (this.index) * 100 + "%";
+				})
+			}
+			mui.init();
+			mui.plusReady(function() {
+
+			})
+
+			//			var online='18.34';//正式
+			var online = '45.14'; //测试
+			var userName = localStorage.userName || 'guest';
+			var publicData = {
+				userName: userName || 'guest'
+			}
+//			alert(userName);
+			mui('.mui-scroll-wrapper').scroll({
+				bounce: false,
+				indicators: true //是否显示滚动条
+			});
+
+			//持仓趋势折线图
+			var chicangChart = echarts.init(document.getElementById("chicang-chart"));
+			var array3 = [];
+			//			var aaa = ['做多', '做空'];
+			var dataChicang = {
+				userQuery: document.all.sel1.options[document.all.sel1.selectedIndex].value || 'JE',
+				productScope: document.all.sel2.options[document.all.sel2.selectedIndex].value || 'ALL',
+				userName: userName
+			}
+
+			function chicangSuc(json) {
+				console.log('持仓折线图');
+				console.log(json);
+				if(json.code == 200) {
+					json = json.result;
+					var userQuery = document.all.sel1.options[document.all.sel1.selectedIndex].value || 'JE';
+					var productScope = document.all.sel2.options[document.all.sel2.selectedIndex].value || 'ALL';
+					var numKArr = [],
+						timeArr = [],
+						numDArr = [],
+						numSArr = [];
+					switch(userQuery) {
+						case 'JE':
+							var chicangIcon = ['多(亿)', '空(亿)', '净头寸(亿)'];
+							var nameS = '（亿元）';
+							mui.each(json, function(jn, jm) {
+								timeArr.push(jm.tradedate);
+								numDArr.push((jm.long_position / 100000000).toFixed(2));
+								numKArr.push((jm.short_position / 100000000).toFixed(2));
+								numSArr.push((jm.net_position / 100000000).toFixed(2));
+							});
+							break;
+						case 'RS':
+							var chicangIcon = ['多', '空', '总人数'];
+							var nameS = '（人）';
+							mui.each(json, function(jn, jm) {
+								timeArr.push(jm.tradedate);
+								numDArr.push(jm.long_amount);
+								numKArr.push(jm.short_amount);
+								numSArr.push(jm.position_amount);
+							});
+							break;
+						default:
+							var chicangIcon = ['多(万)', '空(万)', '总盈亏(万)'];
+							var nameS = '（万元）';
+							mui.each(json, function(jn, jm) {
+								timeArr.push(jm.tradedate);
+								numDArr.push((jm.long_profit_loss / 10000).toFixed(2));
+								numKArr.push((jm.short_profit_loss / 10000).toFixed(2));
+								numSArr.push((jm.floating_profit_loss / 10000).toFixed(2));
+							});
+					}
+					var option = {
+						tooltip: {
+							trigger: 'axis'
+						},
+						legend: {
+							data: chicangIcon,
+							top: 35,
+							left: 250
+						},
+						grid: {
+							left: '0.5%',
+							right: '4%',
+							bottom: '3%',
+							containLabel: true
+						},
+						calculable: true,
+						xAxis: {
+							type: 'category',
+							boundaryGap: false,
+							axisLabel: {
+								textStyle: {
+									color: "#00b1fa",
+									fontSize: "7"
+								}
+							},
+							data: timeArr
+						},
+						yAxis: {
+							type: 'value',
+							axisLine: {
+								show: false //y轴不显示
+							},
+							axisTick: {
+								show: false //刻度不显示
+							},
+
+							splitLine: {
+								lineStyle: {
+									color: '#0f121c' //y轴网格化刻度线的颜色
+								}
+							},
+							axisLabel: {
+								textStyle: {
+									color: "#00b1fa",
+									fontSize: "7"
+								}
+							}
+						},
+						series: [{
+								//							name: chicangIcon[0] + nameS,
+								name: chicangIcon[0],
+								type: 'line',
+								itemStyle: {
+									normal: {
+										color: '#d78e53', //折线点颜色
+										lineStyle: {
+											color: '#d78e53' //折线颜色
+										},
+										areaStyle: {
+											type: 'default',
+											color: "#563c2d"
+										}
+									}
+								},
+								data: numDArr
+							},
+							{
+								//							name: chicangIcon[1] + nameS,
+								name: chicangIcon[1],
+								type: 'line',
+								itemStyle: {
+									normal: {
+										color: '#0092fa',
+										lineStyle: {
+											color: '#0092fa'
+										},
+										areaStyle: {
+											type: 'default',
+											color: "#062543"
+										}
+									}
+								},
+								data: numKArr
+							},
+							{
+								//							name: chicangIcon[2] + nameS,
+								name: chicangIcon[2],
+								type: 'line',
+								itemStyle: {
+									normal: {
+										color: '#a4a4b7',
+										lineStyle: {
+											color: '#a4a4b7'
+										},
+										areaStyle: {
+											type: 'default',
+											color: "#062543"
+										}
+									}
+								},
+								data: numSArr
+							}
+						]
+					};
+
+					//将数据插入echarts canvas绘制成图表
+					chicangChart.setOption(option);
+				}
+
+			}
+			//			ajax(creatOpt('getPositionInfoQuery', dataChicang, chicangSuc));
+
+			function btnSel1() {
+				dataChicang = {
+					userQuery: document.all.sel1.options[document.all.sel1.selectedIndex].value || 'JE',
+					productScope: document.all.sel2.options[document.all.sel2.selectedIndex].value || 'ALL'
+				}
+				ajax(creatOpt('getPositionInfoQuery', dataChicang, chicangSuc));
+			}
+
+			function btnSel2() {
+				dataChicang = {
+					userQuery: document.all.sel1.options[document.all.sel1.selectedIndex].value || 'JE',
+					productScope: document.all.sel2.options[document.all.sel2.selectedIndex].value || 'ALL'
+				}
+				ajax(creatOpt('getPositionInfoQuery', dataChicang, chicangSuc));
+			}
+			var chicangCangwei = echarts.init(document.getElementById("chicang-cangwei"));
+			var aaaa = ['仓位趋势'];
+
+			function cangweiSuc(json) {
+				console.log('仓位折线图');
+				console.log(json);
+				if(json.code == 200) {
+					json = json.result;
+					var numArr = [];
+					var numCopyArr = [];
+					var timeArr = [];
+					mui.each(json, function(jn, jm) {
+						if(jm.position_rate > 1) {
+							jm.position_rate = 1;
+						}
+						jm.position_rate = jm.position_rate;
+						numArr.push(jm.position_rate);
+						timeArr.push(jm.tradedate);
+						if(jm.position_rate) {
+							numCopyArr.push(jm.position_rate);
+						} else {
+							numCopyArr.push(1);
+						}
+					})
+					//				var min = (Math.min.apply(null, numCopyArr)).toFixed(2);//四舍五入，不能用
+					var minStr = String(Math.min.apply(null, numCopyArr));
+					var min = Number(minStr.substr(0, minStr.indexOf(".") + 4)); //保留三位小数
+
+					var optionCangwei = {
+						tooltip: {
+							trigger: 'axis'
+						},
+						legend: {
+							data: aaaa,
+							top: 20,
+							left: 250
+						},
+						grid: {
+							left: '0.5%',
+							right: '4%',
+							bottom: '3%',
+							containLabel: true
+						},
+						calculable: true,
+						xAxis: {
+							type: 'category',
+							boundaryGap: false,
+							axisLabel: {
+								textStyle: {
+									color: "#00b1fa",
+									fontSize: "7"
+								}
+							},
+							data: timeArr
+						},
+						yAxis: {
+							type: 'value',
+							axisLine: {
+								show: false //y轴不显示
+							},
+							axisTick: {
+								show: false //刻度不显示
+							},
+
+							splitLine: {
+								lineStyle: {
+									color: '#0f121c' //y轴网格化刻度线的颜色
+								}
+							},
+							axisLabel: {
+								textStyle: {
+									color: "#00b1fa",
+									fontSize: "7"
+								}
+							},
+							min: min
+						},
+						series: [{
+							name: '仓位趋势',
+							type: 'line',
+							itemStyle: {
+								normal: {
+									color: '#a4a4b7', //折线点颜色
+									lineStyle: {
+										color: '#a4a4b7' //折线颜色
+									}
+								}
+							},
+							data: numArr
+						}]
+
+					}
+					chicangCangwei.setOption(optionCangwei);
+				}
+			}
+
+			function zongtiSuc(json) {
+				console.log('总体表格');
+				console.log(json);
+				if(json.code == 200) {
+					var json = json.result;
+					var htmlfix = '',
+						html = '';
+					mui.each(json, function(jn, jm) {
+						htmlfix += '<tr id=' + jn + '>';
+						htmlfix += '<td>' + jm.product + '</td>';
+						htmlfix += '</tr>'
+						html += '<tr id=' + jn + '>';
+						html += '<td>' + ((jm.long_position - jm.short_position) / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_short * 100).toFixed(0) + '%</td>';
+						html += '<td>' + (jm.position_amount) + '</td>';
+						html += '<td>' + (jm.long_amount) + '</td>';
+						html += '<td>' + (jm.short_amount) + '</td>';
+						html += '<td>' + (jm.long_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.floating_profit_loss / 10000).toFixed(2) + '</td>';
+						//					html += '<td>' + (jm.offset_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.exchange_amount) + '</td>';
+						html += '<td>' + (jm.exchange_account / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.institution_fee / 10000).toFixed(2) + '</td>';
+						html += '</tr>'
+					})
+					//总体
+					var tbFixOverall = document.getElementById("tbFixOverall");
+					var tbScrOverall = document.getElementById("tbScrOverall");
+					tbFixOverall.innerHTML = htmlfix;
+					tbScrOverall.innerHTML = html;
+				}
+			}
+
+			function gaokeSuc(json) {
+				console.log('高客');
+				console.log(json);
+				if(json.code == 200) {
+					json = json.result;
+					var htmlfix = '',
+						html = '';
+					mui.each(json, function(jn, jm) {
+						htmlfix += '<tr id=' + jm.group_name + '>';
+						htmlfix += '<td>' + jm.group_name + '</td>';
+						htmlfix += '</tr>'
+						html += '<tr id=' + jm.group_name + '>';
+						html += '<td>' + (jm.net_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_short * 100).toFixed(0) + '%</td>';
+						html += '<td>' + (jm.position_amount) + '</td>';
+						html += '<td>' + (jm.long_amount) + '</td>';
+						html += '<td>' + (jm.short_amount) + '</td>';
+						html += '<td>' + (jm.long_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.floating_profit_loss / 10000).toFixed(2) + '</td>';
+						//					html += '<td>' + (jm.offset_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.exchange_amount) + '</td>';
+						html += '<td>' + (jm.exchange_account / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.fee_for_member / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.position * 100).toFixed(1) + '%</td>';
+						html += '</tr>'
+					})
+					var tbFixGaoke = document.getElementById("tbFixGaoke");
+					var tbScrGaoke = document.getElementById("tbScrGaoke");
+					tbFixGaoke.innerHTML = htmlfix;
+					tbScrGaoke.innerHTML = html;
+					var gaokelistTrs = mui(".data-table table  tr");
+					pageScr();
+
+					for(var i = 0; i < gaokelistTrs.length; i++) {
+						gaokelistTrs[i].addEventListener("tap", function() {
+							var _this = this;
+							mui.openWindow({
+								url: '../toucun/toucun-gaoke-detail.html',
+								id: 'toucun-gaoke-detail',
+								show: {
+									autoShow: false
+								},
+								extras: {
+									groupScope: _this.id //扩展参数
+								}
+							})
+						})
+					}
+				}
+			}
+
+			function zhiboSuc(json) {
+				console.log('直播');
+				console.log(json);
+				if(json.code == 200) {
+
+					json = json.result;
+					var htmlfix = '',
+						html = '';
+					mui.each(json, function(jn, jm) {
+						htmlfix += '<tr id=' + jm.roomno + '>';
+						htmlfix += '<td>' + jm.roomname + '</td>';
+						htmlfix += '</tr>'
+						html += '<tr id=' + jm.roomno + '>';
+						html += '<td>' + (jm.net_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_position / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.long_short * 100).toFixed(0) + '%</td>';
+						html += '<td>' + (jm.position_amount) + '</td>';
+						html += '<td>' + (jm.long_amount) + '</td>';
+						html += '<td>' + (jm.short_amount) + '</td>';
+						html += '<td>' + (jm.long_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.short_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.floating_profit_loss / 10000).toFixed(2) + '</td>';
+						//					html += '<td>' + (jm.offset_profit_loss / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.exchange_amount) + '</td>';
+						html += '<td>' + (jm.exchange_account / 100000000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.fee_for_member / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.position * 100).toFixed(1) + '%</td>';
+						html += '</tr>'
+					})
+					var tbFixZhibo = document.getElementById("tbFixZhibo");
+					var tbScrZhibo = document.getElementById("tbScrZhibo");
+					tbFixZhibo.innerHTML = htmlfix;
+					tbScrZhibo.innerHTML = html;
+
+					var livebrolistTrs = mui("#tableZhibo table tbody tr");
+					for(var i = 0; i < livebrolistTrs.length; i++) {
+						livebrolistTrs[i].addEventListener("tap", function() {
+							var _this = this;
+							mui.openWindow({
+								url: '../toucun/toucun-liveBro-detail.html',
+								show: {
+									autoShow: false
+								},
+								extras: {
+									roomId: _this.id //扩展参数
+								}
+							})
+						})
+					}
+				}
+			}
+			//		app.title = '柱状图';
+			//柱状图
+			document.getElementById("his").style.background = "transparent";
+			var his = echarts.init(document.getElementById("his"));
+			var her = echarts.init(document.getElementById("her"));
+			var zhuProduct = [];
+			var zhuSPosition = [];
+			var zhuLPosition = [];
+
+			function zhuSuc(json) {
+
+				//					zhuProductCopy = [];
+				//					zhuSPositionCopy = [];
+				//					zhuLPositionCopy = [];
+				console.log('柱状图');
+				console.log(json);
+				if(json.code == 200) {
+					json = json.result;
+					zhuProduct = [];
+					zhuSPosition = [];
+					zhuLPosition = [];
+					mui.each(json, function(jsN, jsC) {
+						zhuProduct.push(jsC.product);
+						zhuSPosition.push(((jsC.short_position * -1) / 100000000).toFixed(2));
+						zhuLPosition.push(((jsC.long_position) / 100000000).toFixed(2));
+					})
+					//					zhuProductCopy = zhuProduct;
+					//					zhuSPositionCopy = zhuSPosition;
+					//					zhuLPositionCopy = zhuLPosition;
+					var option4 = {
+						legend: {
+							data: ['多头(亿)', '空头(亿)'],
+							align: 'right',
+							top: 20,
+							right: 10
+						},
+						tooltip: {},
+						xAxis: {
+							data: zhuProduct,
+							type: 'category',
+							//					color: "white",
+							axisTick: true,
+							// show:false,
+							silent: true,
+							axisLine: {
+								show: false,
+								onZero: true
+							}, //坐标轴是否显示和坐标轴位置
+							splitLine: {
+								show: false
+							}, //网格化
+							splitArea: {
+								show: false
+							}, //x轴的各行变色
+							axisLabel: {
+								textStyle: {
+									color: "#00b1fa",
+									fontSize: '10'
+								},
+								interval: 0,
+								formatter: function(value) {
+									return value.split("").join("\n");
+								}
+							} //z文字竖排显示
+						},
+						yAxis: {
+							inverse: false, //y轴坐标系方向
+							show: true,
+							splitArea: {
+								show: false
+							}, //类似于各行变色，y轴分区域不同颜色
+							splitLine: {
+								show: false
+							},
+							axisLine: {
+								lineStyle: {
+									color: "#0f2e62"
+								}
+							}, //坐标轴的各项设置
+							axisLabel: {
+								textStyle: {
+									color: "#0194d1",
+									fontSize: '7'
+								}
+							}
+						},
+						grid: {
+							left: 28 //柱形图距离左边的位置
+						},
+						//				timeline: {
+						//					borderWidth: '1'
+						//					borderColor: 'white'
+						//				},
+						series: [{
+								name: '多头(亿)',
+								type: 'bar',
+								stack: 'one',
+								//								barWidth: 0.3 * rem, //每列柱形图的宽
+								barGap: '100%',
+								barCategoryGap: '50%',
+								data: zhuLPosition,
+								itemStyle: {
+									normal: {
+										color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+											offset: 0,
+											color: 'black'
+										}, {
+											offset: 1,
+											color: '#996131'
+										}]),
+										barBorderColor: '#ffcf7c',
+										barBorderWidth: 1,
+										barBorderRadius: 0
+									}
+								}
+							},
+							{
+								name: '空头(亿)',
+								type: 'bar',
+								stack: 'one',
+								data: zhuSPosition,
+								itemStyle: {
+									normal: {
+										color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+											offset: 0,
+											color: 'black'
+										}, {
+											offset: 1,
+											color: '#0277cb'
+										}]),
+										barBorderColor: '#76b4cf',
+										barBorderWidth: 1,
+										barBorderRadius: 0
+									}
+								}
+							}
+						]
+					};
+					his.setOption(option4);
+					her.setOption(option4);
+				}
+			}
+			var optzhu = {
+				url: 'http://192.168.' + online + ':8080/EShopRESTfulWS/rest/DataFlat/getPositionInfo',
+				type: 'GET',
+				async: 'false',
+				data: publicData,
+				success: function(json) {
+
+				},
+				error: function(err) {
+					console.log('error');
+					console.log(err);
+				}
+			}
+
+			function gaokeFull() {
+				var data = {
+					productScope: document.all.typeGaoke.options[document.all.typeGaoke.selectedIndex].value || 'ALL',
+					userName: userName
+				}
+				ajax(creatOpt('getPositionServiceGroup', data, gaokeSuc));
+
+			}
+
+			function zhiboFull() {
+				var data = {
+					productScope: document.all.typeZhibo.options[document.all.typeZhibo.selectedIndex].value || 'ALL',
+					userName: userName
+				}
+				ajax(creatOpt('getPositionStudio', data, zhiboSuc));
+
+			}
+		</script>
+
+		<script type="text/javascript">
+			document.getElementById("more").addEventListener("tap", function(e) {
+				this.style.display = "none";
+				//				document.getElementById("table").style.height = "auto";
+				document.getElementById("table").style.display = 'block';
+
+			})
+			document.getElementById("close").addEventListener("tap", function() {
+
+				document.getElementById("more").style.display = "block";
+				//				document.getElementById("table").style.height = "0";
+				document.getElementById("table").style.display = 'none';
+				mui("#item1 .mui-scroll")[0].style.transform = "translate3d(0px, 0px, 0px)";
+
+			})
+		</script>
+		<script type="text/javascript">
+		
+
+			function imgInfo(pp) {
+				var data = {
+					grapKind: pp,
+					userName: userName
+				}
+				ajax(creatOpt('getPositionInfoMsg', data, imgInfoSuc));
+
+				function imgInfoSuc(json) {
+					if(json.code == 200) {
+						json = json.result;
+						var showText;
+						mui.each(json, function(jn, jm) {
+							showText = jm.tipshow;
+						})
+						mui.toast(showText, {
+							duration: 'short',
+							type: 'span'
+						});
+					}
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			//			ajax(optzhu); //柱状态	
+
+			ajax(creatOpt('getPositionInfo', publicData, zhuSuc)); //总体页 柱状态
+			ajax(creatOpt('getPositionInfoDet', publicData, zongtiSuc)); //总体页 表格
+			ajax(creatOpt('getPositionInfoQuery', dataChicang, chicangSuc)); //持仓 折线图
+			ajax(creatOpt('getPositionInfoRate', publicData, cangweiSuc)); //仓位  折线图
+			gaokeFull();
+			zhiboFull();
+			var firstRefreTime = firstTime() * 1000;
+			var myOutTime, myValTime;
+			if(myOutTime) {
+				clearTimeout(myOutTime);
+			}
+
+			myOutTime = setTimeout(function() {
+
+				ajax(creatOpt('getPositionInfo', publicData, zhuSuc)); //总体页 柱状态
+				ajax(creatOpt('getPositionInfoDet', publicData, zongtiSuc));
+				btnSel1();
+				ajax(creatOpt('getPositionInfoRate', publicData, cangweiSuc));
+				if(myValTime) {
+					clearInterval(myValTime);
+				}
+				myValTime = setInterval(function() {
+					ajax(creatOpt('getPositionInfo', publicData, zhuSuc)); //总体页 柱状态
+					ajax(creatOpt('getPositionInfoDet', publicData, zongtiSuc));
+					btnSel1();
+					ajax(creatOpt('getPositionInfoRate', publicData, cangweiSuc));
+				}, 300000)
+			}, firstRefreTime)
+
+			var getOffsetLeft = function(obj) {
+				var tmp = obj.offsetLeft;
+				var val = obj.offsetParent;
+				while(val != null) {
+					tmp += val.offsetLeft;
+					val = val.offsetParent;
+				}
+				return tmp;
+			}
+
+			var ver = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+			ver = parseInt(ver[1], 10);
+			if(ver < 10) {
+				banben();
+
+			}
+
+			function banben() {
+				var s = document.documentElement.clientWidth;
+				document.getElementById('leftNum11').style.width = (s - 25) + 'px';
+				//				document.getElementById('leftNum22').style.width = (s - 60) + 'px';
+				document.getElementById('leftNum33').style.width = (s - 58) + 'px';
+			}
+			window.onresize = banben;
+		</script>
+		<script type="text/javascript">
+			//			window.orientationchange=his.resize;
+			window.addEventListener("orientationchange", function() {
+				var mql = window.matchMedia("(orientation: portrait)");
+				// 如果有匹配，则我们处于垂直视角
+				if(mql.matches) {
+					// 直立方向 竖屏
+
+				} else {
+					//水平方向  横屏
+
+				}
+
+			})
+			document.getElementById("refspage").addEventListener("tap", function() {
+				setTimeout(function() {
+					pageScr();
+				}, 200)
+
+			})
+			
+			
+			
+			
+		</script>
+	</body>
+
+</html>

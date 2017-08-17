@@ -1,0 +1,180 @@
+#tabHome1 .canvas {
+  position: relative;
+  width: 100%; }
+  #tabHome1 .canvas .content {
+    position: relative;
+    margin: 0 auto;
+    width: 250px;
+    height: 250px;
+    background: url(../images/home/cir-bg.png) no-repeat center center;
+    -webkit-background-size: 87.2%;
+    background-size: 87.2%; }
+    #tabHome1 .canvas .content .desc {
+      width: 100%;
+      position: absolute;
+      bottom: 18px;
+      left: 0; }
+      #tabHome1 .canvas .content .desc p {
+        width: 50%; }
+        #tabHome1 .canvas .content .desc p span {
+          text-align: center;
+          color: #03050c;
+          font-size: 0.19rem;
+          line-height: 0.28rem;
+          background-color: #fff;
+          width: 1.2rem;
+          border-radius: 10px;
+          font-weight: 700; }
+        #tabHome1 .canvas .content .desc p:nth-child(1) span {
+          float: left;
+          background-color: #037eff; }
+        #tabHome1 .canvas .content .desc p:nth-child(2) span {
+          float: right;
+          background-color: #a96831; }
+    #tabHome1 .canvas .content .titleKong {
+      width: 1.6rem;
+      position: absolute;
+      left: 0rem;
+      top: 0.6rem; }
+      #tabHome1 .canvas .content .titleKong p {
+        margin-bottom: 0; }
+      #tabHome1 .canvas .content .titleKong div:nth-child(1) {
+        width: 100%; }
+        #tabHome1 .canvas .content .titleKong div:nth-child(1) img {
+          width: 100%; }
+      #tabHome1 .canvas .content .titleKong div:nth-child(2) {
+        margin-top: -23px; }
+        #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc1 {
+          font-weight: 500;
+          font-size: 0.16rem;
+          color: #00B1FA; }
+          #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc1 span:nth-child(1) {
+            margin-right: 2px; }
+        #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc2 {
+          vertical-align: top;
+          margin-top: -9px;
+          font-size: 0.2rem;
+          color: #0283ba; }
+          #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc2 span:nth-child(1) {
+            font-size: 0.36rem;
+            color: #37c3fb; }
+          #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc2 span {
+            vertical-align: top; }
+          #tabHome1 .canvas .content .titleKong div:nth-child(2) .desc2 span:nth-child(2) {
+            font-weight: 500; }
+    #tabHome1 .canvas .content .titleDuo {
+      width: 1.7rem;
+      position: absolute;
+      right: 0rem;
+      top: 0.6rem; }
+      #tabHome1 .canvas .content .titleDuo img {
+        width: 100%; }
+      #tabHome1 .canvas .content .titleDuo p {
+        margin-bottom: 0; }
+      #tabHome1 .canvas .content .titleDuo div:nth-child(1) {
+        width: 100%; }
+        #tabHome1 .canvas .content .titleDuo div:nth-child(1) img {
+          width: 100%; }
+      #tabHome1 .canvas .content .titleDuo div:nth-child(2) {
+        margin-top: -36px;
+        text-align: right; }
+        #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc1 {
+          font-weight: 500;
+          color: #d5aa62;
+          font-size: 0.16rem; }
+          #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc1 span:nth-child(1) {
+            margin-right: 2px; }
+        #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc2 {
+          margin-top: -8px;
+          font-size: 0.2rem;
+          color: #b58338; }
+          #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc2 span:nth-child(1) {
+            color: #ffd993;
+            font-size: 0.36rem; }
+          #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc2 span:nth-child(2) {
+            font-weight: 500; }
+          #tabHome1 .canvas .content .titleDuo div:nth-child(2) .desc2 span {
+            vertical-align: top; }
+  #tabHome1 .canvas .sunBg {
+    margin: 0 auto;
+    width: 221px;
+    position: absolute;
+    top: 14px;
+    right: 0;
+    left: 0; }
+    #tabHome1 .canvas .sunBg img {
+      width: 100%; }
+  #tabHome1 .canvas .selectBtn {
+    position: absolute;
+    left: 0.3rem;
+    top: 0.6rem;
+    background: url(../images/home/selectBtn.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    width: 0.6rem; }
+    #tabHome1 .canvas .selectBtn div {
+      width: 0.24rem;
+      margin: 0 auto; }
+      #tabHome1 .canvas .selectBtn div select {
+        margin: 0;
+        text-align: center;
+        font-size: 0.24rem;
+        width: 0.4rem;
+        padding: 0;
+        padding: 10px 0;
+        background-color: transparent;
+        color: white;
+        white-space: pre-wrap; }
+#tabHome1 .info {
+  width: 100%;
+  margin-top: -25px; }
+  #tabHome1 .info .infoLi {
+    margin: 0 auto;
+    width: 6.94rem;
+    height: 0.92rem;
+    font-size: 0.22rem;
+    color: #00b1fa;
+    line-height: 0.92rem;
+    padding: 0 0.28rem;
+    margin-top: 0.3rem; }
+    #tabHome1 .info .infoLi div:nth-child(1) {
+      width: 1.3rem;
+      text-align: left; }
+    #tabHome1 .info .infoLi div:nth-child(2) {
+      width: 1.47rem;
+      text-align: right;
+      margin-right: 1.17rem; }
+    #tabHome1 .info .infoLi div:nth-child(3) {
+      width: 1.3rem;
+      text-align: left; }
+    #tabHome1 .info .infoLi div:nth-child(4) {
+      width: 1.47rem;
+      text-align: right; }
+  #tabHome1 .info .unit1 {
+    background: url(../images/home/unit1.png) no-repeat 0 0;
+    -webkit-background-size: 100%;
+    background-size: 100%; }
+  #tabHome1 .info .unit2 {
+    background: url(../images/home/unit2.png) no-repeat 0 0;
+    -webkit-background-size: 100%;
+    background-size: 100%; }
+  #tabHome1 .info .unit3 {
+    background: url(../images/home/unit3.png) no-repeat 0 0;
+    -webkit-background-size: 100%;
+    background-size: 100%; }
+  #tabHome1 .info .unit4 {
+    background: url(../images/home/unit4.png) no-repeat 0 0;
+    -webkit-background-size: 100%;
+    background-size: 100%; }
+  #tabHome1 .info .unit5 {
+    background: url(../images/home/unit5.png) no-repeat 0 0;
+    -webkit-background-size: 100%;
+    background-size: 100%; }
+
+@media screen and (min-width: 400px) {
+  #tabHome1 .canvas .content .titleDuo {
+    top: 0.45rem; }
+  #tabHome1 .canvas .content .titleKong {
+    top: 0.38rem; } }
+
+/*# sourceMappingURL=tab-home.css.map */

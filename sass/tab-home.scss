@@ -1,0 +1,263 @@
+#tabHome1 {
+    //  .type {
+    //      width: 100%;
+    //      height: 0.95rem;
+    //      color: #5cbfea;
+    //      line-height: 0.95rem;
+    //      text-align: center;
+    //      span {
+    //          //          line-height: 9.5rem;
+    //      }
+    //  }
+    .canvas {
+        position: relative;
+        width: 100%;
+        //      margin-top: -5px;
+        .content {
+            position: relative;
+            margin: 0 auto;
+            width: 250px;
+            height: 250px;
+            background: url(../images/home/cir-bg.png) no-repeat center center;
+            -webkit-background-size: 87.2%;
+            background-size: 87.2%;
+            .desc {
+                width: 100%;
+                position: absolute;
+                bottom: 18px;
+                left: 0;
+                p {
+                    width: 50%;
+                    span {
+                        text-align: center;
+                        color: #03050c;
+                        font-size: 0.19rem;
+                        line-height: 0.28rem;
+                        background-color: #fff;
+                        width: 1.2rem;
+                        border-radius: 10px;
+                        font-weight: 700;
+                    }
+                    &:nth-child(1) span {
+                        float: left;
+                        background-color: #037eff;
+                    }
+                    &:nth-child(2) span {
+                        float: right;
+                        background-color: #a96831;
+                    }
+                }
+            }
+            .titleKong {
+                width: 1.6rem;
+                position: absolute;
+                left: 0rem;
+                top: 0.6rem;
+                p {
+                    margin-bottom: 0;
+                }
+                div:nth-child(1) {
+                    width: 100%;
+                    img {
+                        width: 100%;
+                    }
+                }
+                div:nth-child(2) {
+                    margin-top: -23px;
+                    .desc1 {
+                        font-weight: 500;
+                        font-size: 0.16rem;
+                        color: #00B1FA;
+                        span:nth-child(1) {
+                            margin-right: 2px;
+                        }
+                    }
+                    .desc2 {
+                        vertical-align: top;
+                        margin-top: -9px;
+                        font-size: 0.2rem;
+                        color: #0283ba;
+                        span:nth-child(1) {
+                            font-size: 0.36rem;
+                            color: #37c3fb;
+                        }
+                        span {
+                            vertical-align: top;
+                        }
+                        span:nth-child(2) {
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+            .titleDuo {
+                width: 1.7rem;
+                position: absolute;
+                right: 0rem;
+                top: 0.6rem;
+                img {
+                    width: 100%;
+                }
+                p {
+                    margin-bottom: 0;
+                }
+                div:nth-child(1) {
+                    width: 100%;
+                    img {
+                        width: 100%;
+                    }
+                }
+                div:nth-child(2) {
+                    margin-top: -36px;
+                    text-align: right;
+                    .desc1 {
+                        font-weight: 500;
+                        color: #d5aa62;
+                        font-size: 0.16rem;
+                        span:nth-child(1) {
+                            margin-right: 2px;
+                        }
+                    }
+                    .desc2 {
+                        margin-top: -8px;
+                        font-size: 0.2rem;
+                        color: #b58338;
+                        span:nth-child(1) {
+                            color: #ffd993;
+                            font-size: 0.36rem;
+                        }
+                        span:nth-child(2) {
+                            font-weight: 500;
+                        }
+                        span {
+                            vertical-align: top;
+                        }
+                    }
+                }
+            }
+        }
+        //      .cirBg {
+        //          margin: 0 auto;
+        //          width: 198px;
+        //          position: absolute;
+        //          top: 25px;
+        //          left: 0;
+        //          right: 0;
+        //          bottom: 0;
+        //          img {
+        //              width: 100%;
+        //          }
+        //      }
+        .sunBg {
+            margin: 0 auto;
+            width: 221px;
+            position: absolute;
+            top: 14px;
+            right: 0;
+            left: 0;
+            img {
+                width: 100%;
+            }
+        }
+        .selectBtn {
+            position: absolute;
+            left: 0.3rem;
+            top: 0.6rem;
+            background: url(../images/home/selectBtn.png) no-repeat 0 0;
+            -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+            width: 0.6rem;
+            //          border: 0.1px solid #fff;
+            div {
+                width: 0.24rem;
+                margin: 0 auto;
+                select {
+                    margin: 0;
+                    text-align: center;
+                    font-size: 0.24rem;
+                    width: 0.4rem;
+                    padding: 0;
+                    padding: 10px 0;
+                    background-color: transparent;
+                    color: white;
+                    white-space: pre-wrap;
+                    //                  background-color: black;
+                    option {
+                        //                      background-color: black;
+                    }
+                }
+            }
+        }
+    }
+    .info {
+        width: 100%;
+        margin-top: -25px;
+        .infoLi {
+            margin: 0 auto;
+            width: 6.94rem;
+            height: 0.92rem;
+            font-size: 0.22rem;
+            color: #00b1fa;
+            line-height: 0.92rem;
+            padding: 0 0.28rem;
+            margin-top: 0.3rem;
+            div:nth-child(1) {
+                width: 1.3rem;
+                text-align: left;
+            }
+            div:nth-child(2) {
+                width: 1.47rem;
+                text-align: right;
+                margin-right: 1.17rem;
+            }
+            div:nth-child(3) {
+                width: 1.3rem;
+                text-align: left;
+            }
+            div:nth-child(4) {
+                width: 1.47rem;
+                text-align: right;
+            }
+        }
+        .unit1 {
+            background: url(../images/home/unit1.png) no-repeat 0 0;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .unit2 {
+            background: url(../images/home/unit2.png) no-repeat 0 0;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .unit3 {
+            background: url(../images/home/unit3.png) no-repeat 0 0;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .unit4 {
+            background: url(../images/home/unit4.png) no-repeat 0 0;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+        .unit5 {
+            background: url(../images/home/unit5.png) no-repeat 0 0;
+            -webkit-background-size: 100%;
+            background-size: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 400px) {
+    #tabHome1 {
+        .canvas {
+            .content {
+                .titleDuo {
+                    top: 0.45rem;
+                }
+                .titleKong {
+                    top: 0.38rem;
+                }
+            }
+        }
+    }
+}

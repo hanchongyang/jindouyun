@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="sass/public.css" />
+		<link rel="stylesheet" type="text/css" href="sass/login2.css" />
+
+	</head>
+
+	<body>
+		<div id="login2">
+			<div class="logo"><img src="images/login/login_logo.png" alt="" /></div>
+			<div class="content">
+				<div class="row une">
+					<p><img src="images/login/login_user.png" alt="" /></p>
+					<p>|</p>
+					<p><input type="text" id="userName" placeholder="请输入账号" /></p>
+					<p id="deleteUne">x</p>
+				</div>
+				<div class="row psd">
+					<p><img src="images/login/login_lock.png" alt="" /></p>
+					<p>|</p>
+					<p><input type="password" id="password" placeholder="请输入密码" /></p>
+					<p id="deletePsd">x</p>
+				</div>
+
+			</div>
+			<div id="msg" class="msg"></div>
+			<button id="log" class="login">登录</button>
+		</div>
+	</body>
+	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/publicFunction.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/myAjax.js"></script>
+
+	<script>
+		(function($, doc) {
+			//			var online = '18.34'; //正式
+			var online = '45.14'; //测试
+			if(localStorage.userName) {
+				document.getElementById("userName").value = localStorage.userName;
+			}
+			$.plusReady(function() {
+				plus.screen.lockOrientation('portrait-primary');
+				document.getElementById('userName').onkeyup = function(event) {
+					var e = event || window.event || arguments.callee.caller.arguments[0];　　　　　　　　　　　　　　　　　
+					var userName = this.value;
+					if(userName == undefined || userName == null || userName == '') {
+						document.getElementById("deleteUne").style.display = "none";
+					} else {
+						document.getElementById("deleteUne").style.display = "block";
+					}
+					console.log(password);
+				};
+				document.getElementById("password").onkeyup = function(event) {
+					var e = event || window.event || arguments.callee.caller.arguments[0];　　　　　　　　　　　　　　　　　
+					var password = this.value;
+					if(password == undefined || password == null || password == '') {
+						document.getElementById("deletePsd").style.display = "none";
+					} else {
+						document.getElementById("deletePsd").style.display = "block";
+					}
+					console.log(password);
+				};
+				document.getElementById("deleteUne").addEventListener("tap", function() {
+					document.getElementById("userName").value = '';
+					document.getElementById("deleteUne").style.display = "none";
+				});
+				document.getElementById("deletePsd").addEventListener("tap", function() {
+					document.getElementById("password").value = '';
+					document.getElementById("deletePsd").style.display = "none";
+				});
+				document.getElementById("log").addEventListener("tap", function() {
+					
+					var password = document.getElementById("password").value;
+					var userName = document.getElementById("userName").value;
+					console.log(password);
+					if(userName == undefined || userName == null || userName == '') {
+						document.getElementById("msg").innerHTML = "账号不能为空，请重新输入";
+						return;
+					}
+					if(password == undefined || password == null || password == '') {
+						document.getElementById("msg").innerHTML = "口令不能为空，请重新输入";
+						return;
+					}
+					plus.nativeUI.showWaiting();
+					var opt = {
+
+						url: "http://192.168." + online + ":8080/EShopRESTfulWS/rest/DataFlat/userLogin",
+						type: 'GET',
+						ansy: 'false',
+						data: {
+							userAccount: userName,
+							userPassword: password
+						},
+						success: function(json) {
+							
+							plus.nativeUI.closeWaiting();
+							if(json.code == 200) {
+
+								var toucunBol = true;
+								var gaokeBol = true;
+								var zhiboBol = true;
+								var newSignBol = true;
+								var bumenBol = true;
+								localStorage.userName = userName;
+								localStorage.newsignShow = json.newaccount;
+								mui.each(json.result, function(i, ele) {
+									localStorage.userId = ele.roleId;
+									console.log('userId=' + localStorage.userId);
+								})
+								//alert(localStorage.userId);
+								switch(localStorage.userId) {
+									case '0':
+										//		0:系统管理员
+										break;
+									case '1':
+										//		1:公司领导
+										break;
+									case '2':
+										//		2:头寸高客经理
+										newSignBol = false;
+										zhiboBol = false;
+										break;
+									case '3':
+										//		3:头寸直播经理
+										newSignBol = false;
+										gaokeBol = false;
+
+										break;
+									case '4':
+										//		4:头寸高客主任
+										newSignBol = false;
+										zhiboBol = false;
+										break;
+									case '5':
+										//		5:头寸直播主任
+										newSignBol = false;
+										gaokeBol = false;
+										break;
+									case '6':
+										//		6:新单经理
+										toucunBol = false;
+										break;
+									case '7':
+										//		7:新单主任 (备用)
+										toucunBol = false;
+										break;
+									case '8':
+										//		8:新单主任
+										toucunBol = false;
+										bumenBol = false;
+										break;
+									default:
+										break;
+								}
+								localStorage.newSignBol = newSignBol;
+								localStorage.toucunBol = toucunBol;
+								localStorage.gaokeBol = gaokeBol;
+								localStorage.zhiboBol = zhiboBol;
+								localStorage.bumenBol = bumenBol;
+								//								alert(localStorage.newSignBol+','+localStorage.toucunBol+','+localStorage.gaokeBol+','+localStorage.zhiboBol);
+								//								var mainPage = $.preload({
+								//									"id": 'main',
+								//									"url": 'template/tab/tab-webview-main.html'
+								//								});
+								//								var main_loaded_flag = false;
+								//								mainPage.addEventListener("loaded", function() {
+								//									main_loaded_flag = true;
+								//								});
+								//								var toMain = function() {
+								//									//使用定时器的原因：
+								//									//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
+								//									var id = setInterval(function() {
+								//										if(main_loaded_flag) {
+								//											clearInterval(id);
+								//											$.fire(mainPage, 'show', null);
+								//											mainPage.show("pop-in");
+								//										}
+								//									}, 20);
+								//								};
+								document.getElementById("msg").innerHTML = "登录成功";
+								//								setTimeout(function() {
+								//									toMain();
+								//								}, 600)
+								mui.openWindow({
+									"id": 'main',
+									"url": 'template/tab/tab-webview-main.html',
+									show: {
+										autoShow: false
+									}
+								});
+
+							} else {
+								document.getElementById("msg").innerHTML = json.msg;
+							}
+
+						},
+						error: function() {
+							document.getElementById("msg").innerHTML = "请检查网络，确保内网访问";
+							plus.nativeUI.closeWaiting();
+						}
+
+					}
+					ajax(opt);
+				})
+			})
+		}(mui, document))
+	</script>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../sass/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../sass/toucun.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<script src="../../js/publicFunction.js" type="text/javascript">
+		</script>
+		<script src="../../js/iconfont.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			body .data-table .t_r table {
+				width: 770px;
+			}
+			
+			@media screen and (orientation: portrait) {
+				/*#back {
+					display: block;
+				}*/
+			}
+			
+			@media screen and (orientation: landscape) {
+				/*#back {
+					display: none;
+				}*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="gaokeDetail" class="">
+			<!--页面主结构开始-->
+
+			<div id="app" class="mui-views">
+				<div class="mui-view">
+					<div class="mui-navbar">
+					</div>
+					<div class="mui-pages">
+					</div>
+				</div>
+			</div>
+			<!--页面主结构结束-->
+			<!--单页面开始-->
+			<div id="liveBro" class="mui-page">
+				<!--页面标题栏开始-->
+				<div style="background-color: transparent;color: white;" class="mui-navbar-inner mui-bar mui-bar-nav row">
+					<button type="button" id="back" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+						<span class="mui-icon mui-icon-left-nav"></span>
+					</button>
+					<!--<h1 class="mui-center mui-title">设置</h1>-->
+					<div style="" id="" class="mui-title search-input">
+						<input style="" type="search" id="search" class="mui-input-clear" placeholder="输入客户姓名">
+
+					</div>
+					<div id="confirm" class="confirm" style="">
+
+						<span style="" class="mui-icon mui-icon-search"></span>
+					</div>
+					<div id="showDiv" class="showDiv" style="">
+						<span id="showAll" style="">
+							显示全部
+						</span></div>
+				</div>
+				<!--<div class="infoSelect row">
+					<p id="exchange"><span>交易所</span><span class="iconfont icon-select-close"></span></p>
+					<p id="types"><span>品种</span><span class="iconfont icon-select-close"></span></p>
+					<p id="direction"><span>方向</span><span class="iconfont icon-select-close"></span></p>
+					<p id="sort"><span>排序</span><span class="iconfont icon-select-close"></span></p>
+				</div>	-->
+				<!--页面标题栏结束-->
+				<!--页面主内容区开始-->
+				<div class="mui-page-content">
+					<div class="mui-scroll-wrapper">
+						<div id="wrap" class="mui-scroll">
+
+							<div id="content" class="content">
+
+								<div class="data-table">
+									<div class="t_l">
+										<table>
+											<tbody>
+												<tr>
+													<th>客户姓名</br>&nbsp;</th>
+													<th>高客小组</br>&nbsp;</th>
+												</tr>
+											</tbody>
+										</table>
+										<div class="t_l_freeze">
+											<table id="tabFix">
+
+											</table>
+										</div>
+									</div>
+									<div class="t_r">
+										<div class="t_r_t">
+											<table>
+												<tbody>
+													<tr>
+														<th>所属投顾</br>&nbsp;</th>
+														<th>当前权益</br>(万元)</th>
+														<th>占用保证金</br>(万元)</th>
+														<th>仓位</br>&nbsp;</th>
+														<th>净入金</br>(万元)</th>
+														<th>公司手续费</br>(万元)</th>
+														<th>品种</br>&nbsp;</th>
+														<th>买卖方向</br>&nbsp;</th>
+														<th>持仓金额</br>(万元)</th>
+														<th>浮动盈亏</br>(万元)</th>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="t_r_content">
+											<table>
+												<tbody id="tabScroll">
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!--<div class="crossScreen" id="crossScreen">
+									<img src="../../images/toucun/toucun/crossScreen.png" />
+								</div>
+								<div class="verticalScreen" id="verticalScreen">
+									<img src="../../images/toucun/toucun/verticalScreen.png" />
+								</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--页面主内容区结束-->
+			</div>
+		</div>
+
+		</style>
+	</body>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../outerControl/iscroll-probe.min.js"></script>
+	<script src="../../js/main.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/myAjax.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var userName = localStorage.userName || 'guest';
+		var publicData = {
+			userName: userName || 'guest'
+		}
+//		alert(userName);
+		mui.plusReady(function() {
+
+			function gaokeDeSuc(json) {
+				console.log('高客详情');
+				console.log(json);
+				plus.nativeUI.closeWaiting();
+				mui.currentWebview.show();
+				if(json.code == 200) {
+					json = json.result;
+					var htmlfix = '',
+						html = '';
+					mui.each(json, function(jn, jm) {
+						htmlfix += '<tr id=' + jn + '>';
+						htmlfix += '<td>' + jm.InvestorName + '</td>';
+						htmlfix += '<td>' + jm.group_name + '</td>';
+						htmlfix += '</tr>'
+						html += '<tr id=' + jn + '>';
+
+						html += '<td>' + jm.broker + '</td>';
+						html += '<td>' + (jm.Initial_interest / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.occupancy_margin / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.position_rate * 100).toFixed(0) + '%' + '</td>';
+						html += '<td>' + (jm.net_account / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.fee_for_member / 10000).toFixed(2) + '</td>';
+						html += '<td>' + jm.product + '</td>';
+						html += '<td>' + jm.direction + '</td>';
+						html += '<td>' + (jm.position / 10000).toFixed(2) + '</td>';
+						html += '<td>' + (jm.profit_loss / 10000).toFixed(2) + '</td>';
+						html += '</tr>'
+					})
+					var tabFix = document.getElementById("tabFix");
+					var tabScroll = document.getElementById("tabScroll");
+					tabFix.innerHTML = htmlfix;
+					tabScroll.innerHTML = html;
+					pageScr();
+				}
+			}
+
+			var groupScope = plus.webview.currentWebview().groupScope;
+
+			function gaokeRef() {
+
+				var data = {
+					//								groupScope:'七组'
+					groupScope: groupScope,
+					userName: userName
+				}
+				ajax(creatOpt('getPositionServiceData', data, gaokeDeSuc));
+			}
+
+			document.getElementById("confirm").addEventListener('tap', function() {
+				var name = document.getElementById("search").value;
+				if(name == undefined || name == null || name == '') {
+					mui.toast('请输入姓名', {
+						duration: 'short',
+						type: 'span'
+					});
+					return;
+				}
+				document.getElementById('showDiv').style.display = 'block';
+				var data = {
+					custScope: document.getElementById("search").value,
+					userName: userName
+				}
+				ajax(creatOpt('getPositionServiceExt', data, gaokeDeSuc));
+			})
+			document.getElementById('showAll').addEventListener('tap', function() {
+				document.getElementById('showDiv').style.display = 'none';
+				document.getElementById("search").value = '';
+				gaokeRef();
+
+			})
+
+			function unlockback() {
+				plus.screen.unlockOrientation();
+			}
+
+			var myOutTime, myValTime;
+			if(myOutTime) {
+				clearTimeout(myOutTime);
+			}
+			var firstRefreTime = firstTime() * 1000;
+			gaokeRef();
+			myOutTime = setTimeout(function() {
+				plus.nativeUI.showWaiting();
+				if(myValTime) {
+					clearTimeout(myValTime);
+				}
+				gaokeRef();
+				myValTime = setTimeout(function() {
+					plus.nativeUI.showWaiting();
+					gaokeRef();
+				}, 30000)
+			}, firstRefreTime)
+		})
+	</script>
+
+</html>

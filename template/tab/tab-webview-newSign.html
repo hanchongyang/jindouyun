@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>新单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../sass/newSign.css" />
+		<link rel="stylesheet" type="text/css" href="../../sass/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<script src="../../js/publicFunction.js" type="text/javascript">
+		</script>
+		<link rel="stylesheet" type="text/css" href="../../outerControl/daterangepicker.css" />
+		<style type="text/css">
+			body .data-table .t_r table {
+				width: 1500px;
+			}
+			
+			body .data-table .t_l {
+				width: 80px;
+			}
+			
+			#refreshContainer {
+				top: 2.2rem;
+				background-color: transparent;
+				touch-action: none;
+			}
+			
+			.date-picker-wrapper {
+				z-index: 10;
+			}
+			
+			.mui-pull-caption {
+				display: block;
+			}
+			
+			table thead {
+				color: #00b1fa;
+			}
+			
+			table td {
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="newSign" id="newSign">
+			<div id="header">
+				<div class="infoSelect row">
+					<p>
+						<select id="pageLeft" name="pageLeft" onchange="changeLeft()" name="">
+
+						</select>
+						<span class="iconfont icon-select-close"></span></p>
+					<p>
+						<select id="pageRight" name="pageRight" onchange="changeRight()" name="">
+
+						</select>
+						<span id="pageRight_icon" class="iconfont icon-select-close"></span></p>
+
+				</div>
+			</div>
+
+			<div id="dateSelect" class="calendar row">
+				<p>新单业绩排名</p>
+				<p><span id="timeStart"></span><span>-</span><span id="timeEnd"></span><span class="iconfont icon-page-open"></span></p>
+			</div>
+
+			<div>
+				<table>
+					<tr id="tabHead">
+						<th>排名</br>&nbsp;</th>
+						<th id="change1">小组</br>&nbsp;</th>
+						<th id="change2">主任</br>&nbsp;</th>
+						<th>开户数</br>&nbsp;</th>
+						<th>激活数</br>&nbsp;</th>
+						<th>新单净值</br>(万元)</th>
+					</tr>
+				</table>
+			</div>
+			<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<table id="theTable">
+						<tbody id="tab">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../outerControl/iscroll-probe.min.js"></script>
+	<script src="../../js/main.js"></script>
+	<script src="../../outerControl/moment.js" type="text/javascript"></script>
+	<script src="../../outerControl/jquery.daterangepicker.js" type="text/javascript"></script>
+	<script src="../../outerControl/fastclick.js" type="text/javascript"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/myAjax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var userName = localStorage.userName || 'guest';
+		var publicData = {
+			userName: userName || 'guest'
+		}
+//		alert(userName);
+		$(function() {
+			FastClick.attach(document.body);
+		});
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.1, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			indicators: false
+		});
+		$('#dateSelect').dateRangePicker({
+			singleMonth: true,
+			showShortcuts: false,
+			showTopbar: false,
+			endDate: new Date(),
+			language: "cn"
+		});
+
+		$('#dateSelect').bind('datepicker-change', function(event, obj) {
+			/* This event will be triggered when second date is selected */
+			// obj will be something like this:
+			// {
+			// 		date1: (Date object of the earlier date),
+			// 		date2: (Date object of the later date),
+			//	 	value: "2013-06-05 to 2013-06-07"
+			// }
+			var obj1 = obj.date1.toLocaleDateString();
+			var obj2 = obj.date2.toLocaleDateString();
+			obj1 = obj1.replace(/年/, '/');
+			obj1 = obj1.replace(/月/, '/');
+			obj1 = obj1.replace(/日/, '/');
+			obj2 = obj2.replace(/年/, '/');
+			obj2 = obj2.replace(/月/, '/');
+			obj2 = obj2.replace(/日/, '/');
+			document.getElementById("timeStart").innerHTML = obj1;
+			document.getElementById("timeEnd").innerHTML = obj2;
+			//			console.log(obj.date1.toLocaleDateString() + "," + obj.date2.toLocaleDateString());
+			reload();
+			scrInit();
+			mui('#refreshContainer').pullRefresh().refresh(true);
+
+		})
+
+		mui.init({
+			pullRefresh: {
+				container: '#refreshContainer', //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+				up: {
+					//					height: 50, //可选.默认50.触发上拉加载拖动距离
+					//					auto: true, //可选,默认false.自动上拉加载一次
+					auto: false,
+					contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+					//					contentrefresh: "没有更多数据了...",
+					contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+					callback: pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				},
+				down: {
+					//					height: 50, //可选.默认50.触发上拉加载拖动距离
+					//					auto: true, //可选,默认false.自动上拉加载一次
+					auto: false,
+					contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					callback: pullfreshDown //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
+			}
+		});
+
+		mui.plusReady(function() {
+			//				plus.screen.lockOrientation('portrait-primary');
+			//				 plus.screen.unlockOrientation();
+		})
+
+		
+		if(localStorage.bumenBol=='true'){  //权限是否为经理
+			var pageLeftArr = ["部门", "小组", "个人"];
+			var groupArr = ["全部"];
+		}else{
+			var pageLeftArr = ["小组", "个人"];
+			var groupArr = []; 
+		}
+		
+		var departmentArr = ["全部"];
+		var pageRightArr = [];
+		var pageLeft = document.getElementById("pageLeft");
+		var pageRight = document.getElementById("pageRight");
+		var dataType; //记录发出的参数 小组／部门／个人
+		var pageCount = 1; //当前页的页数
+		var maxPage;
+		var refreshBol = false;
+		var noneBol = false; //判断当前页面是否为最后一页
+		ajax(creatOpt("getAccountList", publicData, getInitSuc));
+		getTime(); //初始化日历。当月初到当月今日
+		changeLeft('start'); //初始化按钮菜单，默认部门
+
+		//		reload();
+		var firstRefreTime = firstTime() * 1000;
+		console.log(firstRefreTime);
+		var myFirstTime, mytime;
+		if(myFirstTime) {
+			clearTimeout(myFirstTime);
+		}
+		myFirstTime = setTimeout(function() {
+			reload();
+			if(mytime) {
+				clearInterval(mytime);
+			}
+			mytime = setInterval(function() {
+				reload();
+			}, 300000)
+		}, firstRefreTime)
+
+		function reload() {
+			refreshBol = false;
+			pageCount = 1;
+			maxPage = 0;
+			var dataInit = getData();
+			ajax(creatOpt('getAccountDetail1', dataInit, TabSuc));
+
+		}
+
+		function scrInit() {
+			mui('#refreshContainer').pullRefresh().scrollTo(1, 1, 100);
+			//			mui('#refreshContainer').pullRefresh().scrollTo(0, 0, 1000)
+			//					mui('.mui-scroll').style.transform="translate3d(0px, 0px, 0px)";
+			//					mui('#refreshContainer').scroll();
+		}
+
+		function getInitSuc(json) {
+			console.log('初始化部／组信息');
+			console.log(json);
+			if(json.code == 200) {
+				departmentInfo = json.result.A_dept;
+				groupInfo = json.result.B_group;
+				mui.each(departmentInfo, function(i, ele) {
+					departmentArr.push(ele.dept_name);
+				})
+				mui.each(groupInfo, function(i, ele) {
+					groupArr.push(ele.grou_name);
+				})
+				//				pageRightArr = departmentArr;
+				fullHeader(pageLeft, pageLeftArr);
+				fullHeader(pageRight, pageRightArr);
+			} else {
+				console.log(json.msg);
+			}
+
+		}
+
+		function getTime() {
+			var nowDate = new Date();
+			var timeEnd = nowDate.toLocaleDateString();
+			timeEnd = timeEnd.replace(/年/, '/');
+			timeEnd = timeEnd.replace(/月/, '/');
+			timeEnd = timeEnd.replace(/日/, '/');
+
+			var time = formatDate(timeEnd);
+			var timeStart = time[0];
+			timeEnd = time[1];
+			timeStart = timeStart.replace(/-/g, '/');
+			timeEnd = timeEnd.replace(/-/g, '/');
+			document.getElementById('timeStart').innerHTML = timeStart;
+			document.getElementById('timeEnd').innerHTML = timeEnd;
+		}
+
+		function formatDate(dat) {
+			var newDat = dat.split('/');
+			var time = [];
+			if(newDat[1].length < 2) {
+				newDat[1] = '0' + newDat[1];
+			}
+			if(newDat[2].length < 2) {
+				newDat[2] = '0' + newDat[2];
+			}
+			time[0] = newDat[0] + '-' + newDat[1] + '-' + '01';
+			time[1] = newDat[0] + '-' + newDat[1] + '-' + newDat[2];
+			return time;
+		}
+
+		function fullHeader(pageLeft, pageLeftArr) {
+			var option = '';
+
+			for(var i = 0; i < pageLeftArr.length; i++) {
+				option = option + '<option value="' + pageLeftArr[i] + '">' + pageLeftArr[i] + '</option>';
+			}
+			pageLeft.innerHTML = option;
+		}
+		//		getDate();
+
+		function getData() {
+			var a = document.all.pageLeft.options[document.all.pageLeft.selectedIndex];
+			var b = document.all.pageRight.options[document.all.pageRight.selectedIndex];
+			if(localStorage.bumenBol=='true'){
+				var defaultp='Dept';//左侧按钮的默认参数
+			}else{
+				var defaultp='Group';//左侧按钮的默认参数
+			}
+			
+		
+			if(a) {
+				a = a.innerText;
+				switch(a) {
+					case '小组':
+						a = 'Group';
+						break;
+					case '个人':
+						a = 'Person';
+						break;
+					default:
+						a = defaultp;
+						break;
+				}
+			} else {
+				a = defaultp;
+			}
+			if(b) {
+				b = b.innerText;
+				if(b == "全部") {
+					b = 'ALL';
+				}
+			} else {
+				b = 'ALL';
+			}
+			dataType = a;
+			var time1 = formatDate(document.getElementById("timeStart").innerHTML)[1];
+			var time2 = formatDate(document.getElementById("timeEnd").innerHTML)[1];
+			var data = {
+				firScope: a,
+				secScope: b,
+				beginTime: time1,
+				endTime: time2,
+				pageCount: pageCount || '1',
+				userName:userName
+			}
+			return data;
+		}
+
+		function TabSuc(json) {
+			//			mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+			console.log("表格信息");
+			console.log(json);
+
+			if(json.code == 200) {
+				var tabInfo = json.result;
+				var html = '';
+				maxPage = json.max_pagecount;
+				pageCount = json.current_pagenum;
+				switch(dataType) {
+					case 'Group':
+						document.getElementById('change2').style.display = 'block';
+						document.getElementById('tabHead').className = 'group';
+						mui.each(tabInfo, function(i, ele) {
+							html += '<tr class="group" id=' + (i + 1) + '>';
+							html += '<td>' + (i + 1 + ((pageCount - 1) * 20)) + '</td>';
+							html += '<td>' + (ele.gro_name) + '</td>';
+							html += '<td>' + (ele.gro_emp) + '</td>';
+							html += '<td>' + (ele.open_account_d) + '</td>';
+							html += '<td>' + (ele.activate_account_d) + '</td>';
+							html += '<td>' + ((ele.net_value_d) / 10000).toFixed(0) + '</td>';
+							html += '</tr>'
+						});
+
+						break;
+					case 'Person':
+						document.getElementById('change2').style.display = 'block';
+						document.getElementById('tabHead').className = 'group';
+						mui.each(tabInfo, function(i, ele) {
+							html += '<tr class="group" id=' + (i + 1) + '>';
+							html += '<td>' + (i + 1 + ((pageCount - 1) * 20)) + '</td>';
+							html += '<td>' + (ele.emp_name) + '</td>';
+							html += '<td>' + (ele.gro_name) + '</td>';
+							html += '<td>' + (ele.open_account_d) + '</td>';
+							html += '<td>' + (ele.activate_account_d) + '</td>';
+							html += '<td>' + ((ele.net_value_d) / 10000).toFixed(0) + '</td>';
+							html += '</tr>'
+						});
+
+						break;
+					default:
+
+						document.getElementById('change2').style.display = 'none';
+						document.getElementById('tabHead').className = 'dept';
+						var kaihuArr = [];
+						var activationArr = [];
+						var netArr = [];
+						mui.each(tabInfo, function(i, ele) {
+							kaihuArr.push(ele.open_account_d);
+							activationArr.push(ele.activate_account_d);
+							netArr.push(ele.net_value_d);
+							html += '<tr class="dept" id=' + (i + 1) + '>';
+							html += '<td>' + (i + 1 + ((pageCount - 1) * 20)) + '</td>';
+							html += '<td>' + (ele.dept_name) + '</td>';
+							//					html += '<td>' + (ele.zhuren) + '</td>';
+							html += '<td>' + (ele.open_account_d) + '</td>';
+							html += '<td>' + (ele.activate_account_d) + '</td>';
+							html += '<td>' + ((ele.net_value_d) / 10000).toFixed(0) + '</td>';
+							html += '</tr>'
+						});
+						var kaihuSum = 0,
+							activationSum = 0,
+							netSum = 0;
+						for(var i = 0, len = kaihuArr.length; i < len; i++) {
+							kaihuSum += kaihuArr[i];
+						}
+						for(var i = 0, len = activationArr.length; i < len; i++) {
+							activationSum += activationArr[i];
+						}
+						for(var i = 0, len = netArr.length; i < len; i++) {
+							netSum += netArr[i];
+						}
+						html += '<tr class="dept" id=' + (i + 1) + '><td></td><td>总计</td><td>' + (kaihuSum) + '</td><td>' + (activationSum) + '</td><td>' + ((netSum) / 10000).toFixed(0) + '</td>';
+
+						break;
+				}
+
+				var tab = document.getElementById("tab");
+				var theTable = document.getElementById("theTable");
+				if(refreshBol) {
+					console.log("上拉加载");
+					var theTbody = document.createElement('tbody');
+					theTbody.innerHTML = html;
+					theTbody.className = 'newBody';
+					theTable.appendChild(theTbody);
+					var childs = document.getElementById("theTable").childNodes;
+					console.log(childs);
+				} else {
+					console.log("重载");
+					tab.innerHTML = html;
+					//					var childs = document.getElementById("theTable").childNodes;     一个个删除子集dom，因为tab.innerHTML = html后，theTable的子会出现三个，且性能不好
+					//					if(childs.length > 3) {
+					//						for(var i = childs.length - 1; i >= 3; i--) {
+					//							theTable.removeChild(childs[i]);
+					//						}
+					//					}
+					var newBodys = document.getElementsByClassName('newBody');
+					var len = newBodys.length;
+					if(len > 0) {
+						for(var i = 0; i < len; i++) {
+							theTable.removeChild(newBodys[0]);
+						}
+					}
+
+				}
+
+			} else {
+
+				var tab = document.getElementById("tab");
+				var theTable = document.getElementById("theTable");
+				tab.innerHTML = '<tr></tr>';
+				//				removeAlldom(theTable);
+				console.log(json.msg);
+			}
+		}
+
+		function changeLeft(start) {
+			
+			if(localStorage.bumenBol=='true'){
+				var defaulta='部门';
+			}else{
+				var defaulta='小组';
+			}
+			if(start) {
+				var value = defaulta;
+			} else {
+				console.log("按钮一");
+				var value = document.all.pageLeft.options[document.all.pageLeft.selectedIndex].innerText;
+			}
+
+			switch(value) {
+				case "小组":
+					document.getElementById('pageRight').disabled = false;
+					pageRightArr = departmentArr;
+					document.getElementById("pageRight_icon").style.color = "#64D0FE";
+					document.getElementById("change1").innerText = "小组";
+					document.getElementById("change2").innerText = "主任";
+					break;
+				case "个人":
+					document.getElementById('pageRight').disabled = false;
+					pageRightArr = groupArr;
+					document.getElementById("pageRight_icon").style.color = "#64D0FE";
+					document.getElementById("change1").innerText = "投顾";
+					document.getElementById("change2").innerText = "组别";
+					break;
+
+				default:
+					document.getElementById('pageRight').disabled = true;
+					document.getElementById("pageRight_icon").style.color = "#ccc";
+					pageRightArr = [];
+					document.getElementById("change1").innerText = "部门";
+					document.getElementById("change2").innerText = "经理";
+					break;
+
+			}
+			fullHeader(pageRight, pageRightArr);
+			reload();
+			if(start) {
+
+			} else {
+				scrInit();
+				mui('#refreshContainer').pullRefresh().refresh(true);
+
+			}
+
+		}
+
+		function changeRight() {
+			//			var value = document.all.pageRight.options[document.all.pageRight.selectedIndex].value;
+			reload();
+			scrInit();
+			mui('#refreshContainer').pullRefresh().refresh(true);
+
+		}
+
+		function pullfresh() {
+
+			//注意：
+			//1、加载完新数据后，必须执行如下代码，true表示没有更多数据了：
+			//2、若为ajax请求，则需将如下代码放置在处理完ajax响应数据之后
+			//			this.endPullupToRefresh(true | false);
+			refreshBol = true;
+			//			setTimeout(function() {
+			console.log(pageCount + '结束' + maxPage);
+			pageCount = pageCount + 1;
+			noneBol = false;
+			if(pageCount > maxPage) {
+				noneBol = true;
+			} else {
+				console.log('结束' + maxPage);
+				var dataInit = getData();
+				ajax(creatOpt('getAccountDetail1', dataInit, TabSuc));
+
+			}
+			mui('#refreshContainer').pullRefresh().endPullupToRefresh(noneBol); //参数为true代表没有更多数据了。
+
+			//			}, 500);
+
+		}
+
+		function pullfreshDown() {
+			console.log("下拉刷新");
+			//			mui('#refreshContainer').pullRefresh().refresh(true);
+			reload();
+			setTimeout(function() {
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				mui('#refreshContainer').pullRefresh().refresh(true);
+			}, 500)
+			//			
+
+		}
+
+		//		pageScr();
+	</script>
+
+</html>

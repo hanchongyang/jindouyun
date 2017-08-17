@@ -1,0 +1,594 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../sass/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../sass/tab-home.css" />
+		<style type="text/css">
+			html,
+			body {
+				background: url(../../images/home/home-bg.png) no-repeat 0 0;
+				background-size: 100%;
+			}
+			
+			#abs-chart {
+				width: 60%;
+				/*height: 200px;*/
+			}
+			/*.type{
+				width: 100%;
+				height: 9rem;
+				color: #5cbfea;
+			}*/
+			
+			.mui-content {
+				background-color: transparent;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="refreshContain" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="tabHome1" class="mui-content">
+
+					<!--<div class="type row">
+				<span>全部</span>
+				<span>螺纹钢</span>
+				<span>铜</span>
+				<span>黄金</span>
+				<span>白银</span>
+			</div>-->
+					<div class="canvas">
+						<div class="content">
+							<canvas id="mycanvas" width="500" height="500" style="width: 250px;height: 250px;"></canvas>
+							<div class="desc row">
+								<p><span>空单金额</span></p>
+								<p><span>多单金额</span></p>
+							</div>
+							<div class="titleKong">
+								<div><img src="../../images/home/title-kong.png" alt="" /></div>
+								<div id="">
+									<p class="desc1">
+										<span>空单</span><span id="titleKong_number"></span>
+									</p>
+									<p class="desc2">
+										<span id="titleKong_percentage"></span><span>%</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="titleDuo">
+								<div><img src="../../images/home/title-duo.png" alt="" /></div>
+								<div id="">
+									<p class="desc1">
+										<span>多单</span><span id="titleDuo_number"></span>
+									</p>
+									<p class="desc2">
+										<span id="titleDuo_percentage"></span><span>%</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!--<div class="cirBg">
+					<img src="../../images/home/cir-bg.png" />
+				</div>-->
+						<div class="sunBg">
+							<img src="../../images/home/sun-bg.png" />
+						</div>
+						<div class="selectBtn">
+							<div>
+
+								<select id="typeSelect" onchange="typeChange()" name="opt">
+									<option value="ALL">全部</option>
+									<option value="RB">螺纹钢</option>
+									<option value="CU">铜</option>
+									<option value="RU">橡胶</option>
+									<option value="AU">黄金</option>
+									<option value="NI">镍</option>
+									<option value="AG">白银</option>
+									<option value="BU">沥青</option>
+									<option value="I">铁矿石</option>
+									<option value="M">豆粕</option>
+									<option value="P">棕榈油</option>
+									<option value="Y">豆油</option>
+									<option value="J">焦炭</option>
+									<option value="JM">焦煤</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="info">
+						<div class="row infoLi unit1">
+							<div class="fz22">新单数</div>
+							<div class="fz28" id="sales_accout"></div>
+							<!--<div class="fz22" style="color: #666666;">开发ing...</div>-->
+							<div class="fz22">新单净值</div>
+							<div class="fz28" id="sales_netvalue"></div>
+							<!--<div class="fz22" style="color: #666666;">开发ing...</div>-->
+						</div>
+						<div class="row infoLi unit2">
+							<div class="fz22">仓位</div>
+							<div class="fz28" id="position_rate"></div>
+							<div class="fz22">占用保证金</div>
+							<div class="fz28" id="marginlevel"></div>
+						</div>
+						<div class="row infoLi unit3">
+							<div class="fz22">交易人数</div>
+							<div class="fz28" id="exchange_amount"></div>
+							<div class="fz22">成交金额</div>
+							<div class="fz28" id="exchange_account"></div>
+						</div>
+						<div class="row infoLi unit4">
+							<div class="fz22">公司手续费</div>
+							<div class="fz28" id="institution_fee"></div>
+							<div class="fz22">净入金</div>
+							<div class="fz28" id="netdeposit"></div>
+						</div>
+						<div class="row infoLi unit5">
+							<div class="fz22">平仓盈亏</div>
+							<div class="fz28" id="offset_profit_loss"></div>
+							<div class="fz22">浮动盈亏</div>
+							<div class="fz28" id="floating_profit_loss"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/jquery.min.js" type="text/javascript">
+		</script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/publicFunction.js"></script>
+		<script src="../../outerControl/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/myAjax.js" type="text/javascript"></script>
+		<!--<script src="../../js/home/home.js" type="text/javascript" charset="utf-8"></script>-->
+		<!--<script src="../../outerControl/hidpi-canvas.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script>
+			var userName = localStorage.userName || 'guest';
+			var publicData = {
+				userName: userName || 'guest'
+			}
+			mui.plusReady(function() {
+				plus.screen.lockOrientation('portrait-primary');
+			})
+			mui.init({
+				pullRefresh: {
+					container: '#refreshContain', //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						//					height: 50, //可选.默认50.触发上拉加载拖动距离
+						//					auto: true, //可选,默认false.自动上拉加载一次
+						auto: false,
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pullfres //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+
+			function pullfres() {
+
+				setImageFill();
+
+			}
+			//			var online='18.34';//正式
+			var online = '45.14'; //测试
+
+			var mycanvas = document.getElementById("mycanvas");
+			var context = mycanvas.getContext('2d');
+			var radios = 2; //倍数（2倍）高清缩放
+
+			//刻度参数
+			var CENTROID_RADIUS = 3 * radios,
+				CENTROID_STROKE_STYLE = "rgba(0,0,0,0.5)",
+				CENTROID_FILL_STYLE = "rgba(80,190,240,0.6)";
+
+			var RING_INNER_RADIUS = 36 * radios, //里层刻度盘
+				RING_OUTER_RADIUS = 30 * radios,
+				LEFT_INNER_RADIUS = 100 * radios, //最左侧刻度
+				RIGHT_INNER_RADIUS = 90 * radios; //最右侧刻度
+
+			var TICK_WIDTH = 24,
+				TICK_LONG_STROKE_STYLE_LEFT = "#5ccbfd", //内层左侧刻度盘
+				TICK_SHORT_STROKE_STYLE_LEFT = "#2da6ee", //内层右侧刻度盘
+				TICK_LONG_STROKE_STYLE_RIGHT = "#816e51", //内层左侧刻度盘
+				TICK_SHORT_STROKE_STYLE_RIGHT = "#7a6647", //内层右侧刻度盘
+				LEFT_INNER_STYLE = "#ffffff", //左侧刻度底层色
+				LEFT_INNER_STYLES = "#6ad4fe", //左侧刻度表层色
+				RIGHT_INNER_STYLE = "#ffffff", //右侧刻度底层色
+				RIGHT_INNER_STYLES = "#c58719"; //右侧刻度表层色
+
+			var circle = {
+				x: mycanvas.width / 2,
+				y: mycanvas.height / 2,
+				radius: 30 * 2, //内部刻度条半径大小
+				radiusOut: 20 * 2 //外部刻度条半径大小
+			};
+			//用来动态画进度条的渐变图片
+			//			var img;
+			//			img = new Image();
+			//			img.src = "../../images/home/duo6.png";
+			//
+			//			var img1;
+			//			img1 = new Image();
+			//			img1.src = "../../images/home/kong6.png";
+			var bgArr = ["../../images/home/duo6.png", "../../images/home/kong6.png"];
+			var imgArr = [];
+			var flag = 0;
+			var bgLen = bgArr.length;
+			for(var i = 0; i < bgLen; i++) {
+				imgArr[i] = new Image();
+				imgArr[i].src = bgArr[i];
+				imgArr[i].onload = function() {
+					flag++;
+					if(flag == bgLen) {
+						setImageFill();
+					}
+				}
+			}
+			//			if(img.complete && img1.complete) {
+			//				setImageFill();
+			//			} else {
+			//				img1.onload = setImageFill;
+			//			}
+			var newFill = null;
+			var myFirstTime, mytime, outerTime, mytime2;
+			//动态进度条
+			function setImageFill() {
+				context.clearRect(0, 0, 500, 500);
+				var firstRefreTime = firstTime() * 1000; //页面打开后下次刷新间隔时间==firstTimeOut
+
+				newFill = context.createPattern(imgArr[0], 'no-repeat');
+				newFill1 = context.createPattern(imgArr[1], 'no-repeat');
+				context.lineWidth = 14 * 2;
+				context.beginPath();
+				draw();
+				//				drawBot();
+				ajax(creatOpt("getDailyMain", publicData, tabSuc));
+				ajax(creatOpt("getAccountCustom", publicData, tabSuc2));
+				if(myFirstTime) {
+					clearTimeout(myFirstTime);
+				}
+				var xishu1; //外侧刻度盘
+				var xishu2;
+				myFirstTime = setTimeout(function() {
+					context.clearRect(0, 0, 500, 500);
+					draw();
+					ajax(creatOpt("getDailyMain", publicData, tabSuc));
+					ajax(creatOpt("getAccountCustom", publicData, tabSuc2));
+					if(mytime) {
+						clearInterval(mytime);
+					}
+					mytime = setInterval(function() {
+						context.clearRect(0, 0, 500, 500);
+						draw();
+						ajax(creatOpt("getDailyMain", publicData, tabSuc));
+						ajax(creatOpt("getAccountCustom", publicData, tabSuc2));
+					}, 300000)
+				}, firstRefreTime)
+			}
+
+			function tabSuc(json) {
+				console.log('首页表格信息');
+				console.log(json);
+				if(json.code == 200) {
+					mui.each(json.result, function(jsonN, jsonC) {
+						mui("#institution_fee")[0].innerText = (jsonC.institution_fee / 10000).toFixed(2);
+						mui("#exchange_amount")[0].innerText = jsonC.exchange_amount;
+						//							mui("#sales_netvalue")[0].innerText = (jsonC.sales_netvalue/10000).toFixed(2);
+						mui("#offset_profit_loss")[0].innerText = (jsonC.offset_profit_loss / 10000).toFixed(2);
+						//							mui("#sales_accout")[0].innerText = (jsonC.sales_accout/10000).toFixed(2);
+						mui("#floating_profit_loss")[0].innerText = (jsonC.floating_profit_loss / 10000).toFixed(2);
+						mui("#exchange_account")[0].innerText = (jsonC.exchange_account / 100000000).toFixed(2);
+						mui("#netdeposit")[0].innerText = (jsonC.net_account / 10000).toFixed(2);
+						//.toFixed(0)保留小数  坑（如果保留小数后再运算，* 和 / 就会保留失败，+ 和 - 会变成字符串 建议先运算再保留）；
+						mui("#position_rate")[0].innerText = (jsonC.position_rate * 100).toFixed(0) + '%';
+						mui("#marginlevel")[0].innerText = (jsonC.marginlevel / 100000000).toFixed(2);
+					})
+				}
+
+			}
+
+			function tabSuc2(json) {
+				console.log('首页表格信息-新单');
+				console.log(json);
+				mui('#refreshContain').pullRefresh().endPulldownToRefresh();
+				if(json.code == 200) {
+					json = json.result;
+					mui.each(json, function(jsonN, jsonC) {
+						mui("#sales_netvalue")[0].innerText = (jsonC.net_value_d / 10000).toFixed(2);
+						console.log(mui("#sales_netvalue")[0].innerText);
+						checkJson(mui("#sales_netvalue")[0]);
+						mui("#sales_accout")[0].innerText = jsonC.activate_account_d;
+						checkJson(mui("#sales_accout")[0]);
+					})
+				}
+
+			}
+
+			function checkJson(obj) {
+
+				console.log(mui("#sales_netvalue")[0].innerText);
+				if(obj.innerText == undefined || obj.innerText == null || obj.innerText == NaN || obj.innerText == '' || obj.innerText == "undefined" || obj.innerText == "null" || obj.innerText == "NaN" || obj.innerText == "正在刷新...") {
+					obj.innerText = '正在刷新...';
+					obj.style.color = '#666';
+					obj.style.fontSize = 0.22 * rem + 'px';
+				} else {
+					obj.style.color = '#00b1fa';
+					obj.style.fontSize = 0.28 * rem;
+				}
+			}
+
+			//随机系数
+
+			function draw() {
+				var productScope;
+				var newSel = document.all.opt.options[document.all.opt.selectedIndex].value;
+				if(newSel == undefined || newSel == null || newSel == '') {
+
+					productScope = {
+						productScope: 'ALL',
+						userName: userName
+					};
+				} else {
+					productScope = {
+						productScope: newSel,
+						userName: userName
+					};
+				}
+				var optt = {
+					type: 'GET',
+					//					url: 'http://wxtest.yihaohuapu.cn:8081/hpws/ws/activity/queryRecord',
+					url: 'http://192.168.' + online + ':8080/EShopRESTfulWS/rest/DataFlat/getDailyMainGraph',
+					async: 'false',
+					data: productScope,
+					success: function(json) {
+						console.log('首页图形');
+						console.log(json);
+						if(json.code == 200) {
+							var duo, kong;
+							var refreshTime;
+							mui.each(json.result, function(jsonN, jsonC) {
+								//							jsonC.short_position=((jsonC.short_position)/100000000).toFixed(2);
+								//							jsonC.long_position=((jsonC.long_position)/100000000).toFixed(2);
+								var totalChicang = Number(jsonC.short_position) + Number(jsonC.long_position);
+
+								duo = (jsonC.long_position / totalChicang).toFixed(2);
+
+								kong = (jsonC.short_position / totalChicang).toFixed(2);
+
+								mui("#titleKong_number")[0].innerText = ((jsonC.short_position) / 100000000).toFixed(2);
+								mui("#titleDuo_number")[0].innerText = ((jsonC.long_position) / 100000000).toFixed(2);
+								mui("#titleKong_percentage")[0].innerText = ((jsonC.short_position / totalChicang) * 100).toFixed(0);
+								mui("#titleDuo_percentage")[0].innerText = ((jsonC.long_position / totalChicang) * 100).toFixed(0);
+
+								//							var ref = (((jsonC.tradedate).split(' '))[1]).split(':');
+								//							refreshTime = ref[0] + ":" + ref[1];
+								refreshTime = jsonC.tradedate;
+							})
+							var x = 0;
+							var y = 0;
+							var maxX = duo * 2; //多单数值 by 后台 进度条
+							var maxY = kong * 2; //空单数值 	by 后台
+
+							//随机系数
+							xishu1 = kong * 0.1; //外侧刻度盘
+
+							xishu2 = duo * 0.1;
+							yinqingx = 0;
+							yinqingy = 0;
+							if(mytime2) {
+								clearInterval(mytime2);
+							}
+							mytime2 = setInterval(function() {
+								if(x < maxX) {
+									x += 0.03;
+								} else {
+									x = maxX;
+								}
+								if(y < maxY) {
+									y += 0.03;
+								} else {
+									y = maxY;
+								}
+
+								//		if((x + y) == (maxX + maxY)) {
+								if(x >= maxX - 0.05 && y >= maxY - 0.05) {
+									clearInterval(mytime2);
+								}
+
+								//		context.clearRect(0, 0, 500, 500);//不清画布，因为所有canvas都在一个页面，无限加载中间部分引起手机发烫
+
+								context.beginPath();
+								context.arc(circle.x, circle.y, 155, 0.5 * Math.PI, (0.5 - x) * Math.PI, true); //负数增大
+								context.strokeStyle = newFill;
+								context.stroke();
+
+								context.beginPath();
+								context.arc(circle.x, circle.y, 186, 0.5 * Math.PI, (0.5 + y) * Math.PI, false); //正数增大
+								context.strokeStyle = newFill1;
+
+								context.stroke();
+								//							drawTicks(xishu1, xishu2, yinqingx, yinqingy);
+
+							}, 30)
+							drawTicks(xishu1, xishu2, refreshTime);
+						}
+					},
+					error: function(err) {
+						console.log(err.msg);
+
+					}
+
+				}
+				ajax(optt);
+
+			}
+			//绘制仪表刻度（包括长刻度，短刻度）
+			function drawTicks(xishu1, xishu2, refreshTime) {
+				var yinqingx = 0;
+				var yinqingy = 0;
+				var radius = circle.radius + RING_INNER_RADIUS,
+					//内层刻度条大小（显示圆盘的几分之几）
+					ANGLE_MAX = Math.PI * 1,
+					//ANGLE_DELTA  刻度条的密度
+					ANGLE_DELTA = Math.PI / 24,
+					//最外侧引擎密度
+					ANGLE_DELTA_OUTER = Math.PI / 80,
+					tickWidth;
+				// 最外侧两处	
+				var radiusLeft = circle.radiusOut + LEFT_INNER_RADIUS;
+				var radiusRight = circle.radiusOut + RIGHT_INNER_RADIUS;
+				context.beginPath();
+				//					context.lineWidth = 3;
+				//					context.lineCap = "round";
+				context.fillStyle = "#0093d0"; //颜色
+				context.font = "30px 方正兰亭"; //字体
+				context.fontWeight = "100";
+				context.textBaseline = "middle"; //竖直对齐
+				context.textAlign = "center"; //水平对齐　
+				context.fillText("持仓金额", circle.x, circle.y - 15); //绘制文字
+				context.font = "20px 方正兰亭";
+				context.fillText("更新于", circle.x - 33, circle.y + 25);
+				context.font = "30px 方正兰亭";
+				context.fillText(refreshTime, circle.x + 35, circle.y + 20);
+
+				context.font = "15px 方正兰亭";
+				context.fillStyle = "#666666";
+				context.fillText("（亿元）", circle.x, circle.y + 50); //绘制文字
+
+				context.stroke();
+				var absl = 1;
+				var absr = -1;
+				//利用度数做循环  
+				//cnt用于计算数目  
+
+				//angle < ANGLE_MAX/2+2;  /2是刻度盘现实一半   +1是旋转
+				for(var angle = 0 + 1, cnt = 0; angle < ANGLE_MAX + 1; angle = angle + ANGLE_DELTA, cnt++) {
+					drawTick(angle, radius, cnt, TICK_LONG_STROKE_STYLE_LEFT, TICK_SHORT_STROKE_STYLE_LEFT);
+				} //内层刻度盘 左
+				for(var angle = ANGLE_MAX + 1, cnt = 0; angle < 2 * ANGLE_MAX + 1; angle = angle + ANGLE_DELTA, cnt++) {
+					drawTick(angle, radius, cnt, TICK_LONG_STROKE_STYLE_RIGHT, TICK_SHORT_STROKE_STYLE_RIGHT);
+				}
+				if(outerTime) {
+					clearInterval(outerTime);
+				}
+				outerTime = setInterval(function() {
+					if(yinqingx < xishu1) {
+						yinqingx += 0.01;
+					} else {
+						yinqingx = xishu1;
+					}
+					if(yinqingy < xishu2) {
+						yinqingy += 0.01;
+					} else {
+						yinqingy = xishu2;
+					}
+					if(yinqingx >= xishu1 && yinqingy >= xishu2) {
+						clearInterval(outerTime);
+					}
+
+					for(var angle = 0 * (yinqingx + 0.1) + 2.5, cnt = 0; angle < (yinqingx + 0.1) * ANGLE_MAX + 2.5; angle = angle + ANGLE_DELTA_OUTER, cnt++) {
+						drawTickOuter(angle, radiusLeft, cnt, LEFT_INNER_STYLE, absl);
+					}
+					for(var angle = 0 * (yinqingx) + 2.5, cnt = 0; angle < (yinqingx) * ANGLE_MAX + 2.5; angle = angle + ANGLE_DELTA_OUTER, cnt++) {
+						drawTickOuter(angle, radiusLeft, cnt, LEFT_INNER_STYLES, absl);
+					}
+					for(var angle = 2.5, cnt = 0; angle < (yinqingy + 0.1) * ANGLE_MAX + 2.5; angle = angle + ANGLE_DELTA_OUTER, cnt++) {
+						drawTickOuter(angle, radiusLeft, cnt, RIGHT_INNER_STYLE, absr);
+					}
+					for(var angle = 2.5, cnt = 0; angle < (yinqingy) * ANGLE_MAX + 2.5; angle = angle + ANGLE_DELTA_OUTER, cnt++) {
+						drawTickOuter(angle, radiusLeft, cnt, RIGHT_INNER_STYLES, absr);
+					}
+				}, 30)
+
+				//利用半径与半径与x轴夹角绘制单个刻度  
+				function drawTick(angle, radius, cnt, TICK_LONG_STROKE_STYLE, TICK_SHORT_STROKE_STYLE) {
+					var tickWidth;
+
+					context.save();
+					//小刻度密度和颜色
+					if(cnt % 4 === 0) { //每隔四个小刻度条插一个长刻度   TICK_WIDTH/3控制刻度长短
+						//长刻度
+						tickWidth = TICK_WIDTH / 2;
+						context.strokeStyle = TICK_LONG_STROKE_STYLE;
+					} else {
+						//短刻度
+						tickWidth = TICK_WIDTH / 3;
+						context.strokeStyle = TICK_SHORT_STROKE_STYLE;
+					}
+					//开始绘画
+					context.beginPath();
+					context.lineWidth = 3;
+
+					//小刻度刻画
+					context.moveTo(
+						circle.x + Math.cos(angle) * (radius - tickWidth),
+						circle.y + Math.sin(angle) * (radius - tickWidth)
+					);
+					context.lineTo(
+						circle.x + Math.cos(angle) * (radius),
+						circle.y + Math.sin(angle) * (radius)
+					);
+
+					context.stroke();
+
+					context.restore();
+				}
+
+				//利用半径与半径与x轴夹角绘制单个刻度    (外侧加速表盘)
+				function drawTickOuter(angle, radius, cnt, TICK_LONG_STROKE_STYLE, abs) {
+					var tickWidth;
+					context.save();
+					//小刻度密度，颜色，长度
+					if(cnt % 2 === 0) { //每隔四个小刻度条插一个长刻度   TICK_WIDTH/3控制刻度长短
+						//长刻度
+						tickWidth = TICK_WIDTH / 3;
+						context.strokeStyle = TICK_LONG_STROKE_STYLE;
+					} else {
+						tickWidth = TICK_WIDTH / 3;
+						context.strokeStyle = TICK_LONG_STROKE_STYLE;
+					}
+					//开始绘画
+					context.beginPath();
+					context.lineWidth = 3;
+					context.lineCap = "round";
+					//小刻度刻画
+					context.moveTo(
+						circle.x + Math.cos(angle) * (radius - tickWidth) * abs,
+						circle.y + Math.sin(angle) * (radius - tickWidth)
+					);
+					context.lineTo(
+						circle.x + Math.cos(angle) * (radius) * abs,
+						circle.y + Math.sin(angle) * (radius)
+					);
+
+					context.stroke();
+
+					context.restore();
+				}
+			}
+			//			});
+		</script>
+		<script>
+			function typeChange() {
+				setImageFill();
+				var options = {
+					cover: false
+				};
+				//	var str = dateToStr(new Date());
+				var str = new Date();
+				str += ": 欢迎使用HTML5+创建本地消息！";
+				str+='                  '+'sdddddddd';
+				
+				plus.push.createMessage(str, "LocalMSG", options);
+			} //ajax   demo
+		</script>
+	</body>
+
+</html>

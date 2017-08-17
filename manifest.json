@@ -1,0 +1,431 @@
+{
+    "@platforms": ["android", "iPhone", "iPad"],
+    "id": "H55FE69F9",/*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name": "jindouyunBeta",/*应用名称，程序桌面图标名称*/
+    "version": {
+        "name": "1.3.0",/*应用版本名称*/
+        "code": ""
+    },
+    "description": "一个内部应用beta版",/*应用描述信息*/
+    "icons": {
+        "72": "icon.png"
+    },
+    "launch_path": "login2.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer": {
+        "name": "",/*开发者名称*/
+        "email": "",/*开发者邮箱地址*/
+        "url": ""/*开发者个人主页地址*/
+    },
+    "permissions": {
+        "Accelerometer": {
+            "description": "访问加速度感应器"
+        },
+        
+        
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        
+        "Device": {
+            "description": "访问设备信息"
+        },
+        "Downloader": {
+            "description": "文件下载管理"
+        },
+        "Events": {
+            "description": "应用扩展事件"
+        },
+        "File": {
+            "description": "访问本地文件系统"
+        },
+        "Gallery": {
+            "description": "访问系统相册"
+        },
+        
+        "Invocation": {
+            "description": "使用Native.js能力"
+        },
+        "Orientation": {
+            "description": "访问方向感应器"
+        },
+        "Proximity": {
+            "description": "访问距离感应器"
+        },
+        "Storage": {
+            "description": "管理应用本地数据"
+        },
+        
+        "Uploader": {
+            "description": "管理文件上传任务"
+        },
+        "Runtime": {
+            "description": "访问运行期环境"
+        },
+        "XMLHttpRequest": {
+            "description": "跨域网络访问"
+        },
+        "Zip": {
+            "description": "文件压缩与解压缩"
+        },
+        
+        
+        
+        "Webview":{
+        	"description": "窗口管理"
+        },
+        "NativeUI":{
+        	"description": "原生UI控件"
+        },
+        "Navigator":{
+        	"description": "浏览器信息"
+        },
+        "NativeObj":{
+        	"description": "原生对象"
+        },"Push":{}
+    },
+    "plus": {
+        "splashscreen": {
+            "autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting": true/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
+        },
+        "popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+        "distribute": {"plugins":{"push":{"igexin":{"appid":"2OBLtWAYcp9OBSH2hdaLl7","appkey":"67PvpKv4beAGwvKNqik4S9","appsecret":"093i4k1DxLAmNKCTwNiVt3"}}},
+            "apple": {
+                "appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision": "",/*iOS应用打包配置文件*/
+                "password": "",/*iOS应用打包个人证书导入密码*/
+                "p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks":[
+                ]/*调用Native.js调用原生Objective-c API需要引用的FrameWork，如需调用GameCenter，则添加"GameKit.framework"*/
+            },
+            "google": {
+                "packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore": "",/*Android应用打包使用的密钥库文件*/
+                "password": "",/*Android应用打包使用密钥库中证书的密码*/
+                "aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+               "permissions": ["<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>"]
+				/*使用Native.js调用原生安卓API需要使用到的系统权限*/
+            },
+            "orientation": ["portrait-primary","portrait-secondary","landscape-primary","landscape-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons": {
+                "ios": {
+                    "prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+                    "auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone": {
+                        "normal": "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina": "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
+                        "retina7": "unpackage/res/icons/120x120.png", /*iPhone4S/5/6程序图标，分辨率：120x120*/
+			"retina8": "unpackage/res/icons/180x180.png", /*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+                        "spotlight-retina7": "unpackage/res/icons/80x80.png", /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal": "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
+                        "settings-retina": "unpackage/res/icons/58x58.png", /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+			"settings-retina8": "unpackage/res/icons/87x87.png" /*iPhone6Plus设置页面程序图标，分辨率：87x87*/
+                    },
+                    "ipad": {
+                        "normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+                        "normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+                        "retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+                        "spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+                        "spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+                        "settings-retina": "unpackage/res/icons/58x58.png" /*iPad高分屏设置页面程序图标，分辨率：58x58*/
+                    }
+                },
+                "android": {
+                    "mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"/*1080P 高分屏程序图标，分辨率：144x144*/
+                }
+            },
+            "splashscreen": {
+                "ios": {
+                    "iphone": {
+                        "default": "", /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+                        "retina47": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+                        "retina55": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+                        "retina55l": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png"/*5.5 英寸设备(iPhone6 Plus)横屏启动图片，分辨率：2208x1242*/
+                    },
+                    "ipad": {
+                        "portrait": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "landscape": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*iPad横屏启动图片，分辨率：1024x748*/
+                        "landscape-retina": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+                        "portrait7": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+                        "portrait-retina7": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "landscape7": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                        "landscape-retina7": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png"/*iPad iOS7高分屏横屏启动图片，分辨率：2048x1536*/
+                    }
+                },
+                "android": {
+                    "mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi": "", /*大屏启动图片，分辨率：320x442*/
+                    "hdpi": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png", /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi": "/Users/chongyanghan/Desktop/筋斗云/app-pageImg/app-start.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
+                }
+            }
+        }
+    },
+	"dependencies":{
+		"pages": {
+			"template/tab/tab-webview-home.html": {
+				"href": "template/tab/tab-webview-home.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/public.css",
+					"sass/tab-home.css",
+					"images/home/cir-bg.png",
+					"images/home/selectBtn.png",
+					"images/home/unit1.png",
+					"images/home/unit2.png",
+					"images/home/unit3.png",
+					"images/home/unit4.png",
+					"images/home/unit5.png",
+					"images/home/home-bg.png",
+					"js/mui.min.js",
+					"js/publicFunction.js",
+					"outerControl/echarts.js",
+					"js/myAjax.js",
+					"images/home/duo6.png",
+					"images/home/kong6.png",
+					"images/home/sun-bg.png",
+					"images/home/title-kong.png",
+					"images/home/title-duo.png"
+				],
+				"priority": 0
+			},
+			"template/toucun/toucun-gaoke-detail.html": {
+				"href": "template/toucun/toucun-gaoke-detail.html",
+				"resources": [
+					"js/jquery.min.js",
+					"outerControl/iscroll-probe.min.js",
+					"js/main.js",
+					"js/mui.min.js",
+					"js/myAjax.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/public.css",
+					"sass/toucun.css",
+					"images/home/home-bg.png",
+					"images/toucun/toucun/sel-bg.png",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/main.css",
+					"js/iconfont.js"
+				],
+				"priority": 1
+			},
+			"template/toucun/toucun-liveBro-detail.html": {
+				"href": "template/toucun/toucun-liveBro-detail.html",
+				"resources": [
+					"js/jquery.min.js",
+					"outerControl/iscroll-probe.min.js",
+					"js/main.js",
+					"js/mui.min.js",
+					"js/myAjax.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/public.css",
+					"sass/toucun.css",
+					"images/home/home-bg.png",
+					"images/toucun/toucun/sel-bg.png",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/main.css",
+					"js/iconfont.js"
+				],
+				"priority": 2
+			},
+			"template/tab/tab-webview-toucun.html": {
+				"href": "template/tab/tab-webview-toucun.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/public.css",
+					"sass/toucun.css",
+					"images/home/home-bg.png",
+					"images/toucun/toucun/sel-bg.png",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/main.css",
+					"js/iconfont.js",
+					"outerControl/echarts.js",
+					"js/mui.pullToRefresh.js",
+					"js/publicFunction.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/myAjax.js",
+					"js/toucun.js",
+					"js/jquery.min.js",
+					"outerControl/iscroll-probe.min.js",
+					"js/main.js",
+					"images/toucun/toucun/more.png",
+					"images/toucun/toucun/title-chicang.png",
+					"images/toucun/toucun/title-cangwei.png",
+					"images/toucun/toucun/title-type.png"
+				],
+				"refer": [
+					"template/toucun/toucun-gaoke-detail.html",
+					"template/toucun/toucun-liveBro-detail.html"
+				],
+				"priority": 1
+			},
+			"template/tab/tab-webview-newSign.html": {
+				"href": "template/tab/tab-webview-newSign.html",
+				"resources": [
+					"js/jquery.min.js",
+					"outerControl/iscroll-probe.min.js",
+					"js/main.js",
+					"outerControl/moment.js",
+					"outerControl/jquery.daterangepicker.js",
+					"outerControl/fastclick.js",
+					"js/mui.min.js",
+					"js/myAjax.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/newSign.css",
+					"images/home/home-bg.png",
+					"sass/public.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/main.css",
+					"outerControl/daterangepicker.css"
+				],
+				"priority": 2
+			},
+			"template/tab/tab-webview-main.html": {
+				"href": "template/tab/tab-webview-main.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"template/tab/tab-webview-home.html",
+					"template/tab/tab-webview-toucun.html",
+					"template/tab/tab-webview-newSign.html"
+				],
+				"priority": 0
+			},
+			"login2.html": {
+				"href": "login2.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/publicFunction.js",
+					"js/myAjax.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"sass/public.css",
+					"sass/login2.css",
+					"images/login/login_bg.png",
+					"images/login/login_logo.png",
+					"images/login/login_lock.png"
+				],
+				"refer": [
+					"template/tab/tab-webview-main.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"login.html",
+				"sass/toucun.scss",
+				"images/weixin.png",
+				"images/toucun/toucun/verticalScreen.png",
+				"images/qq.png",
+				"js/ajax2.js",
+				"template/tab/pullrefresh_with_tab.html",
+				"images/iconfont-tianjia.png",
+				"sass/toucun.css.map",
+				"sass/tab-home.scss",
+				"forget_password.html",
+				"images/sinaweibo.png",
+				"sass/login2.scss",
+				"libs/easymob-webim-sdk/json2.js",
+				"js/home/mui.js",
+				"sass/newSign.css.map",
+				"images/qihoo.png",
+				"libs/easymob-webim-sdk/jquery-1.11.1.js",
+				"template/toucun/demo.html",
+				"sass/tab-home.css.map",
+				"js/feedback-page.js",
+				"js/mui.view.js",
+				"README.md",
+				"js/app.js",
+				"template/tab/camera_image.html",
+				"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+				"images/home/home_info_bg.png",
+				"libs/easymob-webim-sdk/quickstart.md",
+				"setting.html",
+				"css/style.css",
+				"reg.html",
+				"images/toucun/toucun/crossScreen.png",
+				"js/mui.enterfocus.js",
+				"main.html",
+				"images/home/bg.png",
+				"sass/public.scss",
+				"unlock.html",
+				"outerControl/hidpi-canvas.min.js",
+				"sass/newSign.scss",
+				"js/mui.locker.js",
+				"template/camera/camera.html",
+				"css/feedback-page.css",
+				"js/feedback.js",
+				"sass/public.css.map",
+				"images/user-photo.png",
+				"libs/easymob-webim-sdk/strophe-custom-2.0.0.js"
+			]
+		}
+	},
+	"unpackage":[
+	  "images/home/bg.png",
+	  "images/toucun/toucun/crossScreen.png",
+	  "images/toucun/toucun/verticalScreen.png",
+	  "images/iconfont-tianjia.png",
+	  "images/qihoo.png",
+	  "images/qq.png",
+	  "images/sinaweibo.png",
+	  "images/weixin.png",
+	  "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+	  "libs/easymob-webim-sdk/json2.js",
+	  "libs/easymob-webim-sdk/quickstart.md",
+	  "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+	  "outerControl/hidpi-canvas.min.js",
+	  "sass/login2.scss",
+	  "sass/newSign.css.map",
+	  "sass/newSign.scss",
+	  "sass/public.css.map",
+	  "sass/public.scss",
+	  "sass/tab-home.css.map",
+	  "sass/tab-home.scss",
+	  "sass/toucun.css.map",
+	  "sass/toucun.scss",
+	  "template/camera/camera.html",
+	  "template/tab/camera_image.html",
+	  "template/tab/pullrefresh_with_tab.html",
+	  "template/toucun/demo.html",
+	  "forget_password.html",
+	  "login.html",
+	  "main.html",
+	  "reg.html",
+	  "setting.html",
+	  "unlock.html"
+	]
+}

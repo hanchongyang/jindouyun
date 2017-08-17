@@ -1,0 +1,448 @@
+#overAll {
+  position: static; }
+  #overAll .mui-active {
+    font-size: 18px; }
+  #overAll .title {
+    margin: 20px 15px 10px;
+    color: #6d6d72;
+    font-size: 15px; }
+  #overAll .txtcenter {
+    text-align: center; }
+  #overAll .paaddingl {
+    padding-left: 30%; }
+  #overAll .toucun-padding {
+    padding: 0 15px; }
+  #overAll #slider {
+    background-color: #162833; }
+  #overAll #sliderSegmentedControl {
+    background-color: #0d1118; }
+    #overAll #sliderSegmentedControl .mui-scroll {
+      width: 100%; }
+      #overAll #sliderSegmentedControl .mui-scroll a {
+        display: inline-block;
+        width: 33.3%;
+        color: #64d0fe; }
+  #overAll #sliderProgressBar {
+    background: linear-gradient(to right, #162833, #77c9ed, #162833); }
+  #overAll .table {
+    width: 100%;
+    color: #00b1fa;
+    padding: 0 0.1rem;
+    overflow: hidden; }
+    #overAll .table .divTab {
+      width: 100%; }
+    #overAll .table tr > th {
+      font-size: 0.22rem;
+      white-space: nowrap;
+      padding: 2px 5px; }
+    #overAll .table tr > td {
+      font-size: 0.24rem;
+      padding: 2px 5px; }
+    #overAll .table tr:nth-child(2n) {
+      background-color: #141b31; }
+    #overAll .table table,
+    #overAll .table tr,
+    #overAll .table td,
+    #overAll .table th {
+      text-align: right;
+      border: 0;
+      white-space: nowrap; }
+    #overAll .table .divScr {
+      position: relative;
+      overflow-x: scroll; }
+  #overAll .lbdc-filter {
+    padding-top: 10px;
+    justify-content: space-between; }
+    #overAll .lbdc-filter div:nth-child(1) {
+      color: #3f84a3; }
+    #overAll .lbdc-filter div:nth-child(2) {
+      padding-left: 80px;
+      margin-left: 10px; }
+  #overAll .filter-sel {
+    padding-right: 0.28rem; }
+    #overAll .filter-sel span:nth-child(1) {
+      width: 1.5rem;
+      position: relative; }
+    #overAll .filter-sel span:nth-child(2) {
+      margin-left: -0.4rem; }
+    #overAll .filter-sel select {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      border: 0; }
+  #overAll #item1 {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%; }
+    #overAll #item1 table,
+    #overAll #item1 tr,
+    #overAll #item1 td,
+    #overAll #item1 th {
+      text-align: right; }
+    #overAll #item1 .his {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background-color: transparent; }
+      #overAll #item1 .his #his {
+        height: 250px; }
+      #overAll #item1 .his #her {
+        height: 250px; }
+      #overAll #item1 .his .title-type {
+        position: absolute;
+        width: 2.29rem;
+        top: 0.4rem;
+        left: 0.38rem; }
+        #overAll #item1 .his .title-type img {
+          width: 100%; }
+    #overAll #item1 .more {
+      position: relative;
+      z-index: 11;
+      margin: 0 auto;
+      width: 92.53%; }
+      #overAll #item1 .more img {
+        width: 100%; }
+    #overAll #item1 .table {
+      display: none; }
+      #overAll #item1 .table .close {
+        width: 100%;
+        bottom: 0;
+        text-align: center;
+        background-color: #141b31;
+        padding: 0 0.1rem;
+        z-index: 88; }
+        #overAll #item1 .table .close p {
+          font-size: 0.24rem;
+          color: #6ed5ff;
+          margin-bottom: 0; }
+    #overAll #item1 .infoSelect {
+      width: 100%;
+      justify-content: space-between;
+      opacity: 1;
+      position: relative;
+      z-index: 22;
+      padding: 0.05rem 0; }
+      #overAll #item1 .infoSelect p {
+        width: 25%;
+        margin: 0;
+        border-right: 1px solid white;
+        text-align: center; }
+        #overAll #item1 .infoSelect p:nth-last-child(1) {
+          border: 0; }
+        #overAll #item1 .infoSelect p span:nth-child(1) {
+          text-align: center;
+          width: 100%; }
+        #overAll #item1 .infoSelect p span:nth-last-child(1) {
+          position: relative;
+          font-size: 0.1rem; }
+    #overAll #item1 #showUl {
+      width: 100%;
+      position: absolute;
+      top: 0.15rem;
+      left: 0;
+      z-index: 100;
+      padding: 0; }
+      #overAll #item1 #showUl li {
+        padding-left: 0.1rem;
+        list-style: none;
+        width: 100%;
+        font-size: 0.15rem;
+        line-height: 0.3rem;
+        border-bottom: 1px solid #ddd; }
+    #overAll #item1 .sel {
+      position: relative;
+      left: 200px;
+      top: 40px;
+      z-index: 100; }
+      #overAll #item1 .sel span {
+        text-align: center; }
+      #overAll #item1 .sel select {
+        text-align: center;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        width: auto; }
+      #overAll #item1 .sel .amountSelect,
+      #overAll #item1 .sel .typeSelect {
+        margin-right: 0.3rem;
+        padding: 0.07rem 0.3rem;
+        background: url(../images/toucun/toucun/sel-bg.png) no-repeat 0 0;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+        color: #00b1fa;
+        font-size: 0.24rem; }
+    #overAll #item1 .title-chicang {
+      position: relative;
+      width: 2.29rem;
+      top: 75px;
+      left: 0.38rem;
+      margin-top: -60px;
+      z-index: 100; }
+      #overAll #item1 .title-chicang img {
+        width: 100%; }
+    #overAll #item1 .toucun-chicang {
+      position: relative;
+      width: 100%;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 0; }
+      #overAll #item1 .toucun-chicang .chicang-chart {
+        width: 1000px;
+        height: 200px; }
+    #overAll #item1 .title-cangwei {
+      position: relative;
+      left: 0.38rem;
+      top: 60px;
+      margin-top: -60px;
+      z-index: 11;
+      width: 2.29rem; }
+      #overAll #item1 .title-cangwei img {
+        width: 100%; }
+  #overAll #item2 {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%; }
+    #overAll #item2 .data-table tr th, #overAll #item2 .data-table tr td {
+      border: 0;
+      color: #00b1fa; }
+  #overAll #item3 {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    color: #64d0fe; }
+    #overAll #item3 #tableSort th {
+      cursor: pointer; }
+    #overAll #item3 th,
+    #overAll #item3 td {
+      font-size: 0.28rem;
+      padding: 0.2rem 0.25rem; }
+
+@media screen and (orientation: landscape) {
+  #toucunLive,
+  #gaokeDetail {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    height: 100%; }
+    #toucunLive .search-input,
+    #gaokeDetail .search-input {
+      color: white;
+      position: relative;
+      width: 20%;
+      left: 30%;
+      text-align: left; }
+      #toucunLive .search-input input,
+      #gaokeDetail .search-input input {
+        color: white;
+        width: 100%;
+        padding: 0;
+        font-size: 12px; }
+    #toucunLive .confirm,
+    #gaokeDetail .confirm {
+      width: 44px;
+      position: absolute;
+      top: 10px;
+      left: 55%;
+      right: 0;
+      font-size: 12px;
+      z-index: 100; }
+      #toucunLive .confirm span,
+      #gaokeDetail .confirm span {
+        margin: 0;
+        padding: 0; }
+    #toucunLive .showDiv,
+    #gaokeDetail .showDiv {
+      display: none;
+      position: absolute;
+      top: 14px;
+      left: 80%;
+      right: 0;
+      font-size: 12px;
+      z-index: 100; }
+      #toucunLive .showDiv span,
+      #gaokeDetail .showDiv span {
+        border: 1px solid;
+        padding: 3px 5px;
+        border-radius: 5px; }
+    #toucunLive tr:nth-child(2n),
+    #gaokeDetail tr:nth-child(2n) {
+      background-color: #141b31; }
+    #toucunLive table,
+    #toucunLive tr,
+    #toucunLive td,
+    #toucunLive th,
+    #gaokeDetail table,
+    #gaokeDetail tr,
+    #gaokeDetail td,
+    #gaokeDetail th {
+      font-size: 0.12rem;
+      color: #00b1fa;
+      text-align: right;
+      border: 0;
+      white-space: nowrap;
+      padding-right: 5px; }
+    #toucunLive #wrap,
+    #gaokeDetail #wrap {
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      width: 100%;
+      top: 0.5rem; }
+      #toucunLive #wrap .crossScreen,
+      #gaokeDetail #wrap .crossScreen {
+        display: none;
+        position: absolute;
+        top: 85%;
+        left: 80%;
+        width: 0.82rem; }
+        #toucunLive #wrap .crossScreen img,
+        #gaokeDetail #wrap .crossScreen img {
+          width: 100%; }
+      #toucunLive #wrap .verticalScreen,
+      #gaokeDetail #wrap .verticalScreen {
+        position: absolute;
+        top: 50%;
+        left: 85%;
+        width: 0.7rem; }
+        #toucunLive #wrap .verticalScreen img,
+        #gaokeDetail #wrap .verticalScreen img {
+          width: 100%; }
+
+  #gaokeCross {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    height: 100%; }
+    #gaokeCross tr:nth-child(2n) {
+      background-color: #141b31; }
+    #gaokeCross .lbdc-filter {
+      padding-top: 10px;
+      justify-content: space-between; }
+      #gaokeCross .lbdc-filter div:nth-child(1) {
+        margin-left: 20px;
+        color: #3f84a3;
+        font-size: 0.12rem; }
+      #gaokeCross .lbdc-filter div:nth-child(2) {
+        padding-left: 80px;
+        margin-left: 10px; }
+    #gaokeCross .filter-sel {
+      padding-right: 0.28rem; }
+      #gaokeCross .filter-sel span:nth-child(1) {
+        width: 1rem;
+        position: relative; }
+      #gaokeCross .filter-sel span:nth-child(2) {
+        margin-left: -0.4rem;
+        margin-top: -1px; }
+      #gaokeCross .filter-sel select {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        border: 0; }
+    #gaokeCross table,
+    #gaokeCross tr,
+    #gaokeCross td,
+    #gaokeCross th {
+      font-size: 0.12rem;
+      color: #00b1fa;
+      text-align: right;
+      border: 0;
+      white-space: nowrap;
+      padding-right: 5px; }
+    #gaokeCross .verticalScreen {
+      position: absolute;
+      top: 50%;
+      left: 85%;
+      width: 0.7rem; }
+      #gaokeCross .verticalScreen img {
+        width: 100%; } }
+@media screen and (orientation: portrait) {
+  #toucunLive,
+  #gaokeDetail {
+    background: url(../images/home/home-bg.png) no-repeat 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    height: 100%; }
+    #toucunLive .search-input,
+    #gaokeDetail .search-input {
+      color: white;
+      position: relative;
+      width: 20%;
+      left: 25%;
+      text-align: left; }
+      #toucunLive .search-input input,
+      #gaokeDetail .search-input input {
+        color: white;
+        width: 100%;
+        padding: 0;
+        font-size: 12px; }
+    #toucunLive .confirm,
+    #gaokeDetail .confirm {
+      width: 44px;
+      position: absolute;
+      top: 10px;
+      left: 60%;
+      right: 0;
+      font-size: 12px;
+      z-index: 100; }
+      #toucunLive .confirm span,
+      #gaokeDetail .confirm span {
+        margin: 0;
+        padding: 0; }
+    #toucunLive .showDiv,
+    #gaokeDetail .showDiv {
+      display: none;
+      position: absolute;
+      top: 14px;
+      left: 80%;
+      right: 0;
+      font-size: 12px;
+      z-index: 100; }
+      #toucunLive .showDiv span,
+      #gaokeDetail .showDiv span {
+        border: 1px solid;
+        padding: 3px 5px;
+        border-radius: 5px; }
+    #toucunLive tr:nth-child(2n),
+    #gaokeDetail tr:nth-child(2n) {
+      background-color: #141b31; }
+    #toucunLive table,
+    #toucunLive tr,
+    #toucunLive td,
+    #toucunLive th,
+    #gaokeDetail table,
+    #gaokeDetail tr,
+    #gaokeDetail td,
+    #gaokeDetail th {
+      font-size: 0.22rem;
+      color: #00b1fa;
+      text-align: right;
+      border: 0;
+      white-space: nowrap; }
+    #toucunLive #wrap,
+    #gaokeDetail #wrap {
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      width: 100%;
+      top: 0.9rem; }
+      #toucunLive #wrap .crossScreen,
+      #gaokeDetail #wrap .crossScreen {
+        position: absolute;
+        top: 80%;
+        left: 80%;
+        width: 1.2rem; }
+        #toucunLive #wrap .crossScreen img,
+        #gaokeDetail #wrap .crossScreen img {
+          width: 100%; }
+      #toucunLive #wrap .verticalScreen,
+      #gaokeDetail #wrap .verticalScreen {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0.82rem; }
+        #toucunLive #wrap .verticalScreen img,
+        #gaokeDetail #wrap .verticalScreen img {
+          width: 100%; } }
+
+/*# sourceMappingURL=toucun.css.map */
